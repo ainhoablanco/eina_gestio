@@ -1,0 +1,143 @@
+/* BODY */
+body {
+    background-image: url('');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* TÍTOL PRINCIPAL */
+.title-container {
+    display: inline-block;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* ANIMACIÓ DE LES LLETRES DEL TÍTOL */
+.letter {
+    display: inline-block;
+    opacity: 0;
+    /* desordenar posicio inicial de les lletres */
+    transform: translate(
+        calc(var(--x) * 100px - 50px), 
+        calc(var(--y) * 100px - 50px)
+    );
+    animation: moureLletres 1s ease forwards;
+    /* fa que les lletres surtin desordenades */
+    animation-delay: calc(var(--delay) * 0.2s);
+}
+
+@keyframes moureLletres {
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+/* ESTILS GENERALS DELS BOTONS */
+.btn {
+    color: #000000;
+    font-size: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+/* BOTÓ INICI SESSIÓ */
+.b-loggin {
+    background-color: #ffd900cc;
+    transition: background-color 0.3s;
+}
+
+.b-loggin:hover {
+    background-color: #DAA520;
+}
+
+/* BOTÓ REGISTRAR-SE */
+.b-register {
+    background-color: #ff1491bb;
+    transition: background-color 0.3s;
+}
+
+.b-register:hover {
+    background-color: #e71c9d;
+}
+
+/*eESTILS GENERALS FORMULARI INICIAR SESSIÓ I RESGISTRAR-SE*/
+.formulari-container h2 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.btn.b-loggin-pg, .btn.b-register-pg  {
+    display: block; /* Hace que el botón se comporte como un bloque */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+}
+
+/* ESTIL DEL FORMULARI DE INICIAR SESSIÓ*/
+.formulari-container.login-formulari {
+    background-color: #fff9b0;
+    border: 2px solid #ffd900;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-formulari .formulari-label {
+    color: #8a7b1f;
+}
+
+.login-formulari .formulari-control {
+    background-color: #fffde7;
+    border: 1px solid #ffd900;
+    color: #5d5d5d;
+    border-radius: 8px;
+}
+
+.login-formulari .b-loggin-pg {
+    background-color: #ffd900;
+    color: #353535;
+    border: none;
+}
+
+.login-formulari .b-loggin-pg:hover {
+    background-color: #e5c200;
+}
+
+/* ESTIL DEL FORMULARI DE REGISTRE */
+.formulari-container.register-formulari {
+    background-color: #ffe4e1;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.register-formulari .formulari-label {
+    color: #a04568;
+}
+
+.register-formulari .formulari-control {
+    background-color: #ffecec;
+    border: 1px solid #ff69b4;
+    color: #5d5d5d;
+    border-radius: 8px;
+}
+
+.register-formulari .b-register-pg {
+    background-color: #ff69b4;
+    color: #202020;
+    border: none;
+}
+
+.register-formulari .b-register-pg:hover {
+    background-color: #e0579a;
+}
+
