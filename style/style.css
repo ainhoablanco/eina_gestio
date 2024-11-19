@@ -1,20 +1,34 @@
 /* BODY */
 body {
-    background-image: url('');
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    background-color: #FFFDE7;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+.pantalla-principal {
+    text-align: center; /* Centra el contenido del contenedor */
+}
+
+/* Posición del logo */
+#imatge-logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    height: 100px;
+    width: auto;
+}
+
+
 /* TÍTOL PRINCIPAL */
-.title-container {
+.contenidor-titol {
     display: inline-block;
     font-size: 5rem;
     font-weight: bold;
     color: #4CAF50;
+    margin-bottom: 20px; /* Separación entre título y botones */
 }
 
 /* ANIMACIÓ DE LES LLETRES DEL TÍTOL */
@@ -49,22 +63,22 @@ body {
 }
 
 /* BOTÓ INICI SESSIÓ */
-.b-loggin {
+.boto-loggin {
     background-color: #ffd900cc;
     transition: background-color 0.3s;
 }
 
-.b-loggin:hover {
+.boto-loggin:hover {
     background-color: #DAA520;
 }
 
 /* BOTÓ REGISTRAR-SE */
-.b-register {
+.boto-register {
     background-color: #ff1491bb;
     transition: background-color 0.3s;
 }
 
-.b-register:hover {
+.boto-register:hover {
     background-color: #e71c9d;
 }
 
@@ -74,7 +88,7 @@ body {
     padding-bottom: 20px;
 }
 
-.btn.b-loggin-pg, .btn.b-register-pg  {
+.btn.boto-loggin-pg, .btn.boto-register-pg  {
     display: block; /* Hace que el botón se comporte como un bloque */
     margin: 0 auto; /* Centra el botón horizontalmente */
 }
@@ -100,13 +114,13 @@ body {
     border-radius: 8px;
 }
 
-.login-formulari .b-loggin-pg {
+.login-formulari .boto-loggin-pg {
     background-color: #ffd900;
     color: #353535;
     border: none;
 }
 
-.login-formulari .b-loggin-pg:hover {
+.login-formulari .boto-loggin-pg:hover {
     background-color: #e5c200;
 }
 
@@ -131,13 +145,13 @@ body {
     border-radius: 8px;
 }
 
-.register-formulari .b-register-pg {
+.register-formulari .boto-register-pg {
     background-color: #ff69b4;
     color: #202020;
     border: none;
 }
 
-.register-formulari .b-register-pg:hover {
+.register-formulari .boto-register-pg:hover {
     background-color: #e0579a;
 }
 
