@@ -1,6 +1,6 @@
 /* BODY */
 body {
-    background-color: #FFFDE7;
+    background-color: #2f2f2f;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -21,13 +21,12 @@ body {
     width: auto;
 }
 
-
 /* TÍTOL PRINCIPAL */
 .contenidor-titol {
     display: inline-block;
     font-size: 5rem;
     font-weight: bold;
-    color: #4CAF50;
+    color: #ff66b3;
     margin-bottom: 20px; /* Separación entre título y botones */
 }
 
@@ -35,13 +34,11 @@ body {
 .letter {
     display: inline-block;
     opacity: 0;
-    /* desordenar posicio inicial de les lletres */
     transform: translate(
         calc(var(--x) * 100px - 50px), 
         calc(var(--y) * 100px - 50px)
     );
     animation: moureLletres 1s ease forwards;
-    /* fa que les lletres surtin desordenades */
     animation-delay: calc(var(--delay) * 0.2s);
 }
 
@@ -54,7 +51,6 @@ body {
 
 /* ESTILS GENERALS DELS BOTONS */
 .btn {
-    color: #000000;
     font-size: 1rem;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -64,94 +60,71 @@ body {
 
 /* BOTÓ INICI SESSIÓ */
 .boto-loggin {
-    background-color: #ffd900cc;
+    background-color: #f6f930;
     transition: background-color 0.3s;
 }
 
 .boto-loggin:hover {
-    background-color: #DAA520;
+    background-color: #f6f930cc;
 }
 
 /* BOTÓ REGISTRAR-SE */
 .boto-register {
-    background-color: #ff1491bb;
+    background-color: #f6f930;
     transition: background-color 0.3s;
 }
 
 .boto-register:hover {
-    background-color: #e71c9d;
+    background-color: #f6f930cc;
 }
 
-/*eESTILS GENERALS FORMULARI INICIAR SESSIÓ I RESGISTRAR-SE*/
+/* ESTILS GENERALS FORMULARI INICIAR SESSIÓ I REGISTRAR-SE */
+.formulari-container {
+    background-color: #BBE6E4; /* Fondo del formulario */
+    border: 2px solid #80c9c7; /* Color del borde, ligeramente más oscuro */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* TITULO DEL FORMULARIO */
 .formulari-container h2 {
     text-align: center;
     padding-bottom: 20px;
+    color: #2f2f2f; /* Texto oscuro para buen contraste */
 }
 
-.btn.boto-loggin-pg, .btn.boto-register-pg  {
-    display: block; /* Hace que el botón se comporte como un bloque */
-    margin: 0 auto; /* Centra el botón horizontalmente */
+/* ETIQUETAS */
+.formulari-label {
+    color: #2f2f2f; /* Texto oscuro para etiquetas */
 }
 
-/* ESTIL DEL FORMULARI DE INICIAR SESSIÓ*/
-.formulari-container.login-formulari {
-    background-color: #fff9b0;
-    border: 2px solid #ffd900;
+/* CAMPOS DE CONTROL */
+.formulari-control {
+    background-color: #d6f3f2; /* Fondo más claro para campos de entrada */
+    border: 1px solid #80c9c7; /* Borde acorde al formulario */
+    color: #2f2f2f; /* Texto oscuro */
     border-radius: 8px;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
 }
 
-.login-formulari .formulari-label {
-    color: #8a7b1f;
-}
-
-.login-formulari .formulari-control {
-    background-color: #fffde7;
-    border: 1px solid #ffd900;
-    color: #5d5d5d;
-    border-radius: 8px;
-}
-
-.login-formulari .boto-loggin-pg {
-    background-color: #ffd900;
-    color: #353535;
+/* ESTILO DE LOS BOTONES DEL FORMULARIO */
+.btn.boto-loggin-pg, .btn.boto-register-pg {
+    display: block;
+    margin: 0 auto;
+    background-color: #80c9c7; /* Fondo de los botones */
+    color: #ffffff; /* Texto blanco */
     border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
-.login-formulari .boto-loggin-pg:hover {
-    background-color: #e5c200;
+/* HOVER DE LOS BOTONES */
+.btn.boto-loggin-pg:hover, .btn.boto-register-pg:hover {
+    background-color: #6ab0ae; /* Fondo más oscuro al pasar el ratón */
 }
-
-/* ESTIL DEL FORMULARI DE REGISTRE */
-.formulari-container.register-formulari {
-    background-color: #ffe4e1;
-    border: 2px solid #ff69b4;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.register-formulari .formulari-label {
-    color: #a04568;
-}
-
-.register-formulari .formulari-control {
-    background-color: #ffecec;
-    border: 1px solid #ff69b4;
-    color: #5d5d5d;
-    border-radius: 8px;
-}
-
-.register-formulari .boto-register-pg {
-    background-color: #ff69b4;
-    color: #202020;
-    border: none;
-}
-
-.register-formulari .boto-register-pg:hover {
-    background-color: #e0579a;
-}
-
