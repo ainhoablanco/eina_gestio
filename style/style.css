@@ -2,14 +2,32 @@
 body {
     background-color: #2f2f2f;
     margin: 0;
-    display: flex;
     justify-content: center;
+}
+
+#body-index {
     align-items: center;
+    display: flex;
+}
+
+.pantalla-formulari {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
 }
 
+#titol-animat {
+    margin-top: 7%;
+}
+
 .pantalla-principal {
-    text-align: center; /* Centra el contenido del contenedor */
+    text-align: center;
+    /* Centra el contenido del contenedor */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Posición del logo */
@@ -21,23 +39,31 @@ body {
     width: auto;
 }
 
+.general {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* TÍTOL PRINCIPAL */
 .contenidor-titol {
-    display: inline-block;
+    display: flex;
     font-size: 5rem;
     font-weight: bold;
     color: #ff66b3;
-    margin-bottom: 20px; /* Separación entre título y botones */
+    margin-bottom: 20px;
+    /* Separación entre título y botones */
+    justify-content: center;
 }
 
 /* ANIMACIÓ DE LES LLETRES DEL TÍTOL */
 .letter {
     display: inline-block;
     opacity: 0;
-    transform: translate(
-        calc(var(--x) * 100px - 50px), 
-        calc(var(--y) * 100px - 50px)
-    );
+    transform: translate(calc(var(--x) * 100px - 50px),
+            calc(var(--y) * 100px - 50px));
     animation: moureLletres 1s ease forwards;
     animation-delay: calc(var(--delay) * 0.2s);
 }
@@ -80,8 +106,10 @@ body {
 
 /* ESTILS GENERALS FORMULARI INICIAR SESSIÓ I REGISTRAR-SE */
 .formulari-container {
-    background-color: #BBE6E4; /* Fondo del formulario */
-    border: 2px solid #80c9c7; /* Color del borde, ligeramente más oscuro */
+    background-color: #BBE6E4;
+    /* Fondo del formulario */
+    border: 2px solid #80c9c7;
+    /* Color del borde, ligeramente más oscuro */
     border-radius: 8px;
     padding: 20px;
     max-width: 400px;
@@ -92,19 +120,24 @@ body {
 .formulari-container h2 {
     text-align: center;
     padding-bottom: 20px;
-    color: #2f2f2f; /* Texto oscuro para buen contraste */
+    color: #2f2f2f;
+    /* Texto oscuro para buen contraste */
 }
 
 /* ETIQUETAS */
 .formulari-label {
-    color: #2f2f2f; /* Texto oscuro para etiquetas */
+    color: #2f2f2f;
+    /* Texto oscuro para etiquetas */
 }
 
 /* CAMPOS DE CONTROL */
 .formulari-control {
-    background-color: #d6f3f2; /* Fondo más claro para campos de entrada */
-    border: 1px solid #80c9c7; /* Borde acorde al formulario */
-    color: #2f2f2f; /* Texto oscuro */
+    background-color: #d6f3f2;
+    /* Fondo más claro para campos de entrada */
+    border: 1px solid #80c9c7;
+    /* Borde acorde al formulario */
+    color: #2f2f2f;
+    /* Texto oscuro */
     border-radius: 8px;
     width: 100%;
     padding: 8px;
@@ -112,11 +145,14 @@ body {
 }
 
 /* ESTILO DE LOS BOTONES DEL FORMULARIO */
-.btn.boto-loggin-pg, .btn.boto-register-pg {
+.btn.boto-loggin-pg,
+.btn.boto-register-pg {
     display: block;
     margin: 0 auto;
-    background-color: #80c9c7; /* Fondo de los botones */
-    color: #ffffff; /* Texto blanco */
+    background-color: #80c9c7;
+    /* Fondo de los botones */
+    color: #ffffff;
+    /* Texto blanco */
     border: none;
     padding: 10px 15px;
     font-size: 1rem;
@@ -125,6 +161,64 @@ body {
 }
 
 /* HOVER DE LOS BOTONES */
-.btn.boto-loggin-pg:hover, .btn.boto-register-pg:hover {
-    background-color: #6ab0ae; /* Fondo más oscuro al pasar el ratón */
+.btn.boto-loggin-pg:hover,
+.btn.boto-register-pg:hover {
+    background-color: #6ab0ae;
+    /* Fondo más oscuro al pasar el ratón */
+}
+
+/* CONTENEDOR DE PROYECTOS */
+#tasques {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.projectes {
+    background-color: #bbe6e4d2;
+    border-radius: 8px;
+    display: flex;
+    width: 80%;
+    margin-left: 10%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+}
+
+/* ESTILOS DE LOS PROYECTOS */
+.projecte {
+    background-color: #BBE6E4;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 40px;
+}
+
+/* ESTILO DEL BOTÓN NUEVO PROYECTO */
+.nou-projecte {
+    background-color: #F0F6F6;
+    border-radius: 8px;
+}
+
+#afegir-projecte {
+    font-size: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+}
+
+#afegir-projecte:hover {
+    color: #555;
 }

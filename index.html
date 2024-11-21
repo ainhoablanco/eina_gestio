@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,31 @@
     <link rel="stylesheet" href="style/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
 </head>
-<body>
+
+<body id="body-index">
     <img id="imatge-logo" src="imatges/logoAinTask.png" alt="logo">
-    <div class="pantalla-principal">
-        <div id="titol-animat" class="contenidor-titol">
-            <!--    X = posicion inicial de X
+    <div class="general">
+
+
+        <div class="pantalla-principal">
+            <div class="contenidor-titol">
+                <!--    X = posicion inicial de X
                     Y = posicion inicial de Y
                     delay = retras amb el que apareix -->
-            <span class="letter" style="--x:1; --y:1; --delay:3">A</span> 
-            <span class="letter" style="--x:-1; --y:2; --delay:1">i</span>
-            <span class="letter" style="--x:0.5; --y:-1.5; --delay:4">n</span>
-            <span class="letter" style="--x:-1.5; --y:-1; --delay:2">T</span>
-            <span class="letter" style="--x:1.5; --y:-2; --delay:5">a</span>
-            <span class="letter" style="--x:-2; --y:0.5; --delay:3">s</span>
-            <span class="letter" style="--x:1; --y:1.5; --delay:6">k</span>
+                <span class="letter" style="--x:1; --y:1; --delay:3">A</span>
+                <span class="letter" style="--x:-1; --y:2; --delay:1">i</span>
+                <span class="letter" style="--x:0.5; --y:-1.5; --delay:4">n</span>
+                <span class="letter" style="--x:-1.5; --y:-1; --delay:2">T</span>
+                <span class="letter" style="--x:1.5; --y:-2; --delay:5">a</span>
+                <span class="letter" style="--x:-2; --y:0.5; --delay:3">s</span>
+                <span class="letter" style="--x:1; --y:1.5; --delay:6">k</span>
+            </div>
+            <div>
+                <a href="htdocs/login.html" class="btn boto-loggin">Iniciar sessió</a>
+                <a href="htdocs/register.html" class="btn boto-register">Registrar-se</a>
+            </div>
         </div>
-        <div>
-            <a href="htdocs/login.html" class="btn boto-loggin">Iniciar sessió</a>
-            <a href="htdocs/register.html" class="btn boto-register">Registrar-se</a>
-        </div>
-    </div>    
+    </div>
 </body>
+
 </html>
