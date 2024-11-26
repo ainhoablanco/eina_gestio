@@ -209,7 +209,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 280px;
-    height: 200px;
+    height: 300px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: 1.2rem;
@@ -226,7 +226,9 @@ body {
 
 /* Campos de proyecto */
 .nom-projecte,
-.descripcio-projecte {
+.descripcio-projecte,
+.data-inici,
+.data-fi {
     background-color: #f4f9f9;
     border: 1px solid #80c9c7;
     border-radius: 8px;
