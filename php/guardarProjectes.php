@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dataFi = $_POST['data_fi'] ?? '';
 
     if (empty($nom) || empty($descripcio) || empty($dataInici) || empty($dataFi)) {
-        echo json_encode(['success' => false, 'message' => 'Els camps nom, descripció, data inici i data fi són obligatoris.']);
+        echo json_encode(['success' => false, 'message' => 'Tots els camps son obligatoris']);
         exit;
     }
 
