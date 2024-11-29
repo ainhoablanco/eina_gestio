@@ -32,6 +32,9 @@ function register($name, $email, $password) {
 
     $sentencia->execute();
 
+    $id_usuari = $connexio->lastInsertId();
+    $_SESSION['id_usuari_actual'] = $id_usuari;
+
     $connexio = tancarBD($connexio);
 }
 
@@ -61,7 +64,7 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
     try {
     $connexio = obrirBD();
 
-    // Obrir transacció
+    // Obrir transacció per poder fer mes d un insert a la vegada
     $connexio->beginTransaction();
 
     $insertarSentencia = "insert into projecte (nom, descripcio, data_inici, data_fi) values (:nom, :descripcio, :data_inici, :data_fi)";
