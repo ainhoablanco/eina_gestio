@@ -2,110 +2,64 @@ const projecteNou = document.getElementById('afegir-projecte');
 const projectes = document.querySelector('.projectes');
 
 function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dataFi = '', esEdicio = false) {
-    divProjecte.innerHTML = ''; // Limpia el contenido actual del div
+    divProjecte.innerHTML = '';
+
+    const form = document.createElement('form');
+    form.action = '../php/controller.php';
+    form.method = 'POST';
 
     const nomProjecte = document.createElement('input');
     nomProjecte.type = 'text';
+    nomProjecte.name = 'nom';
     nomProjecte.placeholder = 'Nom del projecte';
     nomProjecte.classList.add('nom-projecte');
     nomProjecte.value = nom;
 
     const descripcioProjecte = document.createElement('textarea');
+    descripcioProjecte.name = 'descripcio';
     descripcioProjecte.placeholder = 'Descripció del projecte';
     descripcioProjecte.classList.add('descripcio-projecte');
     descripcioProjecte.value = descripcio;
 
     const dataIniciProjecte = document.createElement('input');
     dataIniciProjecte.type = 'date';
+    dataIniciProjecte.name = 'data_inici';
     dataIniciProjecte.classList.add('data-inici');
     dataIniciProjecte.value = dataInici;
 
     const dataFiProjecte = document.createElement('input');
     dataFiProjecte.type = 'date';
+    dataFiProjecte.name = 'data_fi';
     dataFiProjecte.classList.add('data-fi');
     dataFiProjecte.value = dataFi;
 
     const guardarBoto = document.createElement('button');
-    guardarBoto.textContent = 'Guardar';
+    guardarBoto.type = 'submit';
+    guardarBoto.textContent = 'Crear projecte';
     guardarBoto.classList.add('btn-guardar');
+    guardarBoto.name = 'guardar_projecte';
 
-    guardarBoto.addEventListener('click', () => {
+    form.addEventListener('submit', (event) => {
         const nom = nomProjecte.value.trim();
         const descripcio = descripcioProjecte.value.trim();
         const dataInici = dataIniciProjecte.value;
         const dataFi = dataFiProjecte.value;
-    
-        if (!nom || !descripcio || !dataInici || !dataFi) {
-            alert('Hi ha algun camp incomplert');
-            return;
-        }
-    
-        fetch('guardarProjectes.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                nom: nom,
-                descripcio: descripcio,
-                data_inici: dataInici,
-                data_fi: dataFi
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Imprime la respuesta del servidor para depurar
-            if (data.success) {
-                alert(data.message);
-                divProjecte.innerHTML = '';
-                const eliminarBoto = document.createElement('button');
-                eliminarBoto.textContent = 'X';
-                eliminarBoto.classList.add('btn-eliminar');
-                eliminarBoto.style.position = 'absolute';
-                eliminarBoto.style.top = '5px';
-                eliminarBoto.style.right = '5px';
-    
-                eliminarBoto.addEventListener('click', () => {
-                    divProjecte.remove();
-                });
-    
-                const nomText = document.createElement('p');
-                nomText.textContent = nom;
-                nomText.classList.add('nom-projecte-guardat');
-    
-                const datesText = document.createElement('p');
-                datesText.textContent = `Inici: ${dataInici} - Fi: ${dataFi}`;
-                datesText.classList.add('dates-projecte');
-    
-                const editarBoto = document.createElement('button');
-                editarBoto.textContent = 'Editar';
-                editarBoto.classList.add('btn-editar');
-    
-                editarBoto.addEventListener('click', () => {
-                    afegirCamps(divProjecte, nom, descripcio, dataInici, dataFi, true);
-                });
-    
-                divProjecte.style.position = 'relative';
-                divProjecte.appendChild(eliminarBoto);
-                divProjecte.appendChild(nomText);
-                divProjecte.appendChild(datesText);
-                divProjecte.appendChild(editarBoto);
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Hi ha hagut un error al guardar el projecte.');
-        });
-    });    
 
-    divProjecte.appendChild(nomProjecte);
-    divProjecte.appendChild(descripcioProjecte);
-    divProjecte.appendChild(dataIniciProjecte);
-    divProjecte.appendChild(dataFiProjecte);
-    divProjecte.appendChild(guardarBoto);
+        if (!nom || !descripcio || !dataInici || !dataFi) {
+            event.preventDefault();
+            alert('Hi ha algun camp incomplert');
+        }
+    });
+
+    form.appendChild(nomProjecte);
+    form.appendChild(descripcioProjecte);
+    form.appendChild(dataIniciProjecte);
+    form.appendChild(dataFiProjecte);
+    form.appendChild(guardarBoto);
+
+    divProjecte.appendChild(form);
 }
+
 
 projecteNou.addEventListener('click', () => {
     const nouDivProjecte = document.createElement('div');
