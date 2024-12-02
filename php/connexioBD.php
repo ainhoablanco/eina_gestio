@@ -80,7 +80,7 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
     //Obtindre el id del projecte.
     $id_projecte = $connexio->lastInsertId();
     //Fer el següent insrt
-    if (isset($_SESSION['id_usuari_actual'])) {  // Verificar si la sesión está activa
+    if (isset($_SESSION['id_usuari_actual'])) {
         $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) values (:id_usuari, :id_projecte, 1)";
         $sentencia = $connexio->prepare($insertarSentencia);
 
@@ -89,7 +89,7 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
 
         $sentencia->execute();
     } else {
-        throw new Exception("No se encontró el ID de usuario en la sesión");
+        throw new Exception("Aquest id no està a la sessió");
     }
     //COMMIT
     $connexio->commit();
@@ -104,5 +104,8 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
 
 }
 
+function select_projecte (){
+    
+}
 
 ?>
