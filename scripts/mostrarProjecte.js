@@ -17,8 +17,9 @@ function mostrarProjectes(projectes) {
     projectes.forEach(projecte => {
         const divProjecte = document.createElement('div');
         divProjecte.classList.add('projecte');
+        divProjecte.setAttribute("data-idProjecte", projecte.id_projecte);
 
-        const nomProjecte = document.createElement('h3');
+        const nomProjecte = document.createElement('h1');
         nomProjecte.textContent = projecte.nom;
         nomProjecte.classList.add('nom-projecte-guardat');
 
@@ -27,10 +28,16 @@ function mostrarProjectes(projectes) {
         descripcioProjecte.classList.add('descripcio-projecte');
 
         const editarBoto = document.createElement('button');
-        editarBoto.type = 'submit';
+        editarBoto.type = 'button';
         editarBoto.textContent = 'Editar projecte';
         editarBoto.classList.add('btn-editar');
         editarBoto.name = 'editar_projecte';
+
+        editarBoto.addEventListener('click', () => {
+            const nouDivProjecte = document.createElement('div');
+            nouDivProjecte.classList.add('projecte');
+            actualitzarCamps(nouDivProjecte, projecte.nom, projecte.descripcio, projecte.data_inici, projecte.data_fi, projecte.id_projecte);
+        });
 
         divProjecte.appendChild(nomProjecte);
         divProjecte.appendChild(descripcioProjecte);
@@ -38,4 +45,74 @@ function mostrarProjectes(projectes) {
 
         containerProjectes.appendChild(divProjecte);
     });
+}
+
+
+const projecteNou2 = document.getElementById('afegir-projecte');
+const projectes2 = document.querySelector('.projectes');
+
+function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dataFi = '', idProjecte = '') {
+    divProjecte.innerHTML = '';
+
+    const form = document.createElement('form');
+    form.action = '../php/controller.php';
+    form.method = 'POST';
+
+    const nomProjecte = document.createElement('input');
+    nomProjecte.type = 'text';
+    nomProjecte.name = 'nom';
+    nomProjecte.placeholder = 'Nom del projecte';
+    nomProjecte.classList.add('nom-projecte');
+    nomProjecte.value = nom;
+
+    const descripcioProjecte = document.createElement('textarea');
+    descripcioProjecte.name = 'descripcio';
+    descripcioProjecte.placeholder = 'Descripció del projecte';
+    descripcioProjecte.classList.add('descripcio-projecte');
+    descripcioProjecte.value = descripcio;
+
+    const dataIniciProjecte = document.createElement('input');
+    dataIniciProjecte.type = 'date';
+    dataIniciProjecte.name = 'data_inici';
+    dataIniciProjecte.classList.add('data-inici');
+    dataIniciProjecte.value = dataInici;
+
+    const dataFiProjecte = document.createElement('input');
+    dataFiProjecte.type = 'date';
+    dataFiProjecte.name = 'data_fi';
+    dataFiProjecte.classList.add('data-fi');
+    dataFiProjecte.value = dataFi;
+
+    const idProjecteInput = document.createElement('input');
+    idProjecteInput.type = 'hidden';
+    idProjecteInput.name = 'id_projecte';
+    idProjecteInput.value = idProjecte;
+
+    const actualitzarBoto = document.createElement('button');
+    actualitzarBoto.type = 'submit';
+    actualitzarBoto.textContent = 'Actualitzar projecte';
+    actualitzarBoto.classList.add('btn-guardar');
+    actualitzarBoto.name = 'actualitzar_projecte';
+
+    form.addEventListener('submit', (event) => {
+        const nom = nomProjecte.value.trim();
+        const descripcio = descripcioProjecte.value.trim();
+        const dataInici = dataIniciProjecte.value;
+        const dataFi = dataFiProjecte.value;
+
+        if (!nom || !descripcio || !dataInici || !dataFi) {
+            event.preventDefault();
+            alert('Hi ha algun camp incomplert');
+        }
+    });
+
+    form.appendChild(nomProjecte);
+    form.appendChild(descripcioProjecte);
+    form.appendChild(dataIniciProjecte);
+    form.appendChild(dataFiProjecte);
+    form.appendChild(idProjecteInput);
+    form.appendChild(actualitzarBoto);
+
+    divProjecte.appendChild(form);
+    projectes.appendChild(divProjecte);
 }

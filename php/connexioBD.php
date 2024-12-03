@@ -104,8 +104,24 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
 
 }
 
-function select_projecte (){
+function actualitzar_projecte($nom, $descripcio, $data_inici, $data_fi, $id_projecte) {
+    try {
+        $connexio = obrirBD();
+        $insertarSentencia = "update projecte set nom = :nom, descripcio = :descripcio, data_inici = :data_inici, data_fi = :data_fi where id_projecte = :id_projecte";
+        $sentencia = $connexio->prepare($insertarSentencia);
     
+        $sentencia->bindParam(':nom', $nom);
+        $sentencia->bindParam(':descripcio', $descripcio);
+        $sentencia->bindParam(':data_inici', $data_inici);
+        $sentencia->bindParam(':data_fi', $data_fi);
+        $sentencia->bindParam(':id_projecte', $id_projecte);
+    
+        $sentencia->execute();
+
+        $connexio = tancarBD($connexio);
+    } catch (Exception $e) {
+        echo "Error al actualizar el proyecto: " . $e->getMessage();
+    }
 }
 
 ?>

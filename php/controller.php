@@ -10,6 +10,7 @@ if (isset($_POST['login'])) {
         echo "Nom d'usuari o contrasenya incorrectes";
     }
 }
+
 if (isset($_POST['register'])) {
     register($_POST['name'],$_POST['email'],$_POST['password']);
     
@@ -23,5 +24,10 @@ if (isset($_POST['guardar_projecte'])) {
     exit();
 }
 
+if (isset($_POST['actualitzar_projecte'])) {
+    actualitzar_projecte($_POST['nom'], $_POST['descripcio'], $_POST['data_inici'], $_POST['data_fi'], $_POST['id_projecte']);
+    header('Location: ../htdocs/proyectos.html');
+    exit();
+}
 
 ?>
