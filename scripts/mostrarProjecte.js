@@ -19,7 +19,7 @@ function mostrarProjectes(projectes) {
         divProjecte.classList.add('projecte');
         divProjecte.setAttribute("data-idProjecte", projecte.id_projecte);
 
-        const nomProjecte = document.createElement('h1');
+        const nomProjecte = document.createElement('h3');
         nomProjecte.textContent = projecte.nom;
         nomProjecte.classList.add('nom-projecte-guardat');
 
