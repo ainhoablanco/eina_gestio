@@ -178,6 +178,8 @@ body {
     cursor: pointer;
     color: #ff66b3;
     transition: color 0.3s ease;
+    width: 280px;
+    height: 300px;
 }
 
 #afegir-projecte:hover {
@@ -237,7 +239,7 @@ body {
 }
 
 /* Botón Guardar */
-.btn-guardar, .btn-editar {
+.btn-guardar, .btn-actualitzar {
     background-color: #f6f930;
     color: black;
     border: none;
@@ -245,10 +247,25 @@ body {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    size: 10px;
     transition: background-color 0.3s ease;
 }
 
-.btn-guardar:hover, .btn-editar:hover {
+.btn-editar{
+    color: black;
+    background-color: transparent;
+    border: solid 1px #ff3a99;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.btn-editar:hover{
+    background-color: #ff3a991a;
+}
+
+.btn-guardar:hover, .btn-actualitzar:hover {
     background-color: #f6f930cc;
 }
 
@@ -262,6 +279,23 @@ body {
 
 .btn-eliminar:hover{
     background-color: #bbe6e4ce;
+}
+
+.btn-entrar{
+    background-color: #f6f9309f;
+    color: f6f930;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-entrar:hover{
+    background-color: #f6f930;
 }
 
 .nom-projecte-guardat{

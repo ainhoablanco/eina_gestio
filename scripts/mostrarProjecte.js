@@ -33,15 +33,25 @@ function mostrarProjectes(projectes) {
         editarBoto.classList.add('btn-editar');
         editarBoto.name = 'editar_projecte';
 
+        const entrarBoto = document.createElement('button');
+        entrarBoto.type = 'button';
+        entrarBoto.textContent = 'ENTRAR';
+        entrarBoto.classList.add('btn-entrar');
+
         editarBoto.addEventListener('click', () => {
             const nouDivProjecte = document.createElement('div');
             nouDivProjecte.classList.add('projecte');
             actualitzarCamps(nouDivProjecte, projecte.nom, projecte.descripcio, projecte.data_inici, projecte.data_fi, projecte.id_projecte);
         });
 
+        entrarBoto.addEventListener('click', () => {
+            window.location.href = 'tasques.html';
+        });
+
         divProjecte.appendChild(nomProjecte);
         divProjecte.appendChild(descripcioProjecte);
         divProjecte.appendChild(editarBoto);
+        divProjecte.appendChild(entrarBoto);
 
         containerProjectes.appendChild(divProjecte);
     });
@@ -91,7 +101,7 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     const actualitzarBoto = document.createElement('button');
     actualitzarBoto.type = 'submit';
     actualitzarBoto.textContent = 'Actualitzar projecte';
-    actualitzarBoto.classList.add('btn-guardar');
+    actualitzarBoto.classList.add('btn-actualitzar');
     actualitzarBoto.name = 'actualitzar_projecte';
 
     form.addEventListener('submit', (event) => {
