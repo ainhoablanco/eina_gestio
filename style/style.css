@@ -302,3 +302,8 @@ body {
     color: #ff66b3;
     font-size: 30px;
 }
+
+.error-message{
+    color: red;
+    padding-top: 10px;
+}

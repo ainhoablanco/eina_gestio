@@ -29,6 +29,24 @@
                     <input type="password" class="formulari-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn boto-register-pg" name="register">Registra't</button>
+
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message">
+                        <?php
+                        switch ($_GET['error']) {
+                            case 'empty_fields':
+                                echo "Tots els camps són obligatoris.";
+                                break;
+                            case 'user_exists':
+                                echo "L'usuari o l'email ja estan registrats.";
+                                break;
+                            case 'unknown':
+                                echo "Hi ha hagut un problema amb el registre. Torna-ho a intentar.";
+                                break;
+                        }
+                        ?>
+                    </div>
+                <?php endif; ?>
             </form>
 
         </div>

@@ -20,22 +20,28 @@ function tancarBD($connexio) {
 }
 
 function register($name, $email, $password) {
-    $connexio = obrirBD();
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    try {
+        $connexio = obrirBD();
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $insertarSentencia = "insert into usuari ( nom_usuari, email, contrasenya ) VALUES ( :name, :email, :password )";
-    $sentencia = $connexio->prepare($insertarSentencia);
+        $insertarSentencia = "insert into usuari (nom_usuari, email, contrasenya) values (:name, :email, :password)";
+        $sentencia = $connexio->prepare($insertarSentencia);
 
-    $sentencia->bindParam(':name', $name);
-    $sentencia->bindParam(':email', $email);
-    $sentencia->bindParam(':password', $password);
+        $sentencia->bindParam(':name', $name);
+        $sentencia->bindParam(':email', $email);
+        $sentencia->bindParam(':password', $password);
 
-    $sentencia->execute();
+        $sentencia->execute();
 
-    $id_usuari = $connexio->lastInsertId();
-    $_SESSION['id_usuari_actual'] = $id_usuari;
+        $id_usuari = $connexio->lastInsertId();
+        $_SESSION['id_usuari_actual'] = $id_usuari;
 
-    $connexio = tancarBD($connexio);
+        $connexio = tancarBD($connexio);
+        return true;
+    } catch (PDOException $e) {
+        echo "Error en el registro: " . $e->getMessage();
+        return false;
+    }
 }
 
 function login($name, $password){
@@ -57,6 +63,23 @@ function login($name, $password){
         tancarBD($connexio);
         return false;
     }
+}
+
+function usuari_existent($nom, $email){
+    $connexio = obrirBD();
+
+    $consulta = "select * from usuari where nom_usuari = :name or email = :email";
+    $sentencia = $connexio->prepare($consulta);
+    
+    $sentencia->bindParam(':name', $nom);
+    $sentencia->bindParam(':email', $email);
+    $sentencia->execute();
+
+    $resultat = $sentencia->fetch(PDO::FETCH_ASSOC);
+    tancarBD($connexio);
+
+    return $resultat ? true : false;
+
 }
 
 function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {

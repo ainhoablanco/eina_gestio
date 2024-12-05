@@ -7,16 +7,29 @@ if (isset($_POST['login'])) {
         header('Location: ../htdocs/proyectos.html');
         exit();
     } else {
-        echo "Nom d'usuari o contrasenya incorrectes";
+        header('Location: ../php/login.php?error=1');
+        exit();
     }
 }
 
 if (isset($_POST['register'])) {
-    register($_POST['name'],$_POST['email'],$_POST['password']);
-    
-    header('Location: ../htdocs/proyectos.html');
-    exit();
+    if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])) {
+        header('Location: ../php/register.php?error=empty_fields');
+        exit();
+    }
+    if (usuari_existent($_POST['name'], $_POST['email'])) {
+        header('Location: ../php/register.php?error=user_exists');
+        exit();
+    }
+    if (register($_POST['name'], $_POST['email'], $_POST['password'])) {
+        header('Location: ../htdocs/proyectos.html');
+        exit();
+    } else {
+        header('Location: ../php/register.php?error=unknown');
+        exit();
+    }
 }
+
 
 if (isset($_POST['guardar_projecte'])) {
     guardar_projecte($_POST['nom'], $_POST['descripcio'], $_POST['data_inici'], $_POST['data_fi']);

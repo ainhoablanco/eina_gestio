@@ -25,6 +25,10 @@
                     <input type="password" class="formulari-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn boto-loggin-pg" name="login">Inicia sessió</button>
+
+                <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+                    <div class="error-message">Nom d'usuari o contrasenya incorrectes</div>
+                <?php endif; ?>
             </form>
         </div>
     </div>
