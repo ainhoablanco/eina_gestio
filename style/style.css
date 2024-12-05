@@ -165,13 +165,13 @@ body {
 }
 
 /* Botón añadir proyecto */
-.nou-projecte {
+.nou-projecte, .nova-tasca {
     background-color: transparent;
     border-radius: 8px;
     text-align: center;
 }
 
-#afegir-projecte {
+#afegir-projecte, #afegir-tasca {
     font-size: 3rem;
     background: none;
     border: none;
@@ -182,12 +182,12 @@ body {
     height: 300px;
 }
 
-#afegir-projecte:hover {
+#afegir-projecte:hover, #afegir-tasca:hover {
     color: #ff3a99;
 }
 
 /* Contenedor de proyectos */
-.projectes {
+.projectes, .tasques {
     background-color: #bbe6e4d2;
     border-radius: 8px;
     width: 90%;
@@ -200,7 +200,7 @@ body {
 }
 
 /* Cada proyecto */
-.projecte {
+.projecte, .tasca {
     background-color: #BBE6E4;
     color: black;
     display: flex;
@@ -218,7 +218,7 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.projecte:hover {
+.projecte:hover, .tasca:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }

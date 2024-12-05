@@ -45,7 +45,7 @@ function mostrarProjectes(projectes) {
         });
 
         entrarBoto.addEventListener('click', () => {
-            window.location.href = 'tasques.html';
+            window.location.href = '../htdocs/tasques.html';
         });
 
         divProjecte.appendChild(nomProjecte);
