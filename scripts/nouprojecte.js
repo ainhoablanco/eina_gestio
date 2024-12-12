@@ -85,10 +85,9 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
 
                 elementColaborador.appendChild(botoEliminar);
                 colaboradorsSeleccionats.appendChild(elementColaborador);
-
-                actualitzarColaboradorsOcults();
             }
         });
+        actualitzarColaboradorsOcults();
     }
 
     function actualitzarColaboradorsOcults() {

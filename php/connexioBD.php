@@ -82,68 +82,87 @@ function usuari_existent($nom, $email){
 
 }
 
-function guardar_projecte($nom, $descripcio, $data_inici, $data_fi,$colaboradors) {
-
+function guardar_projecte($nom, $descripcio, $data_inici, $data_fi, $colaboradors) {
     try {
+        $connexio = obrirBD();
 
-    $colaboradors = json_decode($colaboradors, true);
-    $connexio = obrirBD();
+        // Iniciar transacción
+        $connexio->beginTransaction();
 
-    // Obrir transacció per poder fer mes d un insert a la vegada
-    $connexio->beginTransaction();
-
-    $insertarSentencia = "insert into projecte (nom, descripcio, data_inici, data_fi) values (:nom, :descripcio, :data_inici, :data_fi)";
-    $sentencia = $connexio->prepare($insertarSentencia);
-
-    $sentencia->bindParam(':nom', $nom);
-    $sentencia->bindParam(':descripcio', $descripcio);
-    $sentencia->bindParam(':data_inici', $data_inici);
-    $sentencia->bindParam(':data_fi', $data_fi);
-
-    $sentencia->execute();
-
-    //Obtindre el id del projecte.
-    $id_projecte = $connexio->lastInsertId();
-    //Fer el següent insrt
-    if (isset($_SESSION['id_usuari_actual'])) {
-        $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) values (:id_usuari, :id_projecte, 1)";
+        // Insertar el proyecto
+        $insertarSentencia = "insert into projecte (nom, descripcio, data_inici, data_fi) values (:nom, :descripcio, :data_inici, :data_fi)";
         $sentencia = $connexio->prepare($insertarSentencia);
 
-        $sentencia->bindParam(':id_usuari', $_SESSION['id_usuari_actual']);
-        $sentencia->bindParam(':id_projecte', $id_projecte);
+        $sentencia->bindParam(':nom', $nom);
+        $sentencia->bindParam(':descripcio', $descripcio);
+        $sentencia->bindParam(':data_inici', $data_inici);
+        $sentencia->bindParam(':data_fi', $data_fi);
 
         $sentencia->execute();
-    } else {
-        throw new Exception("Aquest id no està a la sessió");
-    }
 
-    $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) select :id_usuari, :id_projecte, :rol_usuari from dual where
-    not exists (select 1 from usuari_projecte_rol where id_projecte = :projecte_id and id_usuari = :id_usuari)";
-    $sentencia = $connexio->prepare($insertarSentencia);
+        // Obtener el ID del proyecto
+        $id_projecte = $connexio->lastInsertId();
 
+        // Insertar el primer usuario (el usuario actual en sesión)
+        if (isset($_SESSION['id_usuari_actual'])) {
+            $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) 
+                                  select :id_usuari, :id_projecte, 1
+                                  where not exists (
+                                    select 1 from usuari_projecte_rol where id_usuari = :id_usuari and id_projecte = :id_projecte
+                                  )";
+            $sentencia = $connexio->prepare($insertarSentencia);
+            $id_usuari = $_SESSION['id_usuari_actual'];
+            $sentencia->bindParam(':id_usuari', $id_usuari);
+            $sentencia->bindParam(':id_projecte', $id_projecte);
+            $sentencia->execute();
+        } else {
+            throw new Exception("El ID de usuario no está en la sesión");
+        }
 
-    foreach ($colaboradors as $id_usuari) { 
+        // Insertar los colaboradores adicionales
+        if ($colaboradors) {
+            // Dividir los colaboradores
+            $myArray = explode(',', $colaboradors);
 
-        $sentencia->bindParam(':id_usuari', $id_usuari);
-        $sentencia->bindParam(':id_projecte', $id_projecte);
-        $rol_usuari = 2;
-        $sentencia->bindParam(':rol_usuari', $rol_usuari);
+            foreach ($myArray as $id_colaborador) {
+                // Verificar si la relación ya existe
+                $consulta = "select 1 from usuari_projecte_rol where id_usuari = :id_usuari and id_projecte = :id_projecte";
+                $sentencia = $connexio->prepare($consulta);
+                $sentencia->bindParam(':id_usuari', $id_colaborador);
+                $sentencia->bindParam(':id_projecte', $id_projecte);
+                $sentencia->execute();
 
-        $sentencia->execute();
-    }
+                // Si no existe, insertar la relación
+                if ($sentencia->rowCount() == 0) {
+                    $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) 
+                                          values (:id_usuari, :id_projecte, :id_rol)";
+                    $sentencia = $connexio->prepare($insertarSentencia);
+                    $sentencia->bindParam(':id_usuari', $id_colaborador);
+                    $sentencia->bindParam(':id_projecte', $id_projecte);
+                    $id_rol = 2;  // Rol de colaborador
+                    $sentencia->bindParam(':id_rol', $id_rol);
+                    $sentencia->execute();
+                }
+            }
+        }
 
-    //COMMIT
-    $connexio->commit();
-    $connexio = tancarBD($connexio);
+        // Commit de la transacción
+        $connexio->commit();
+        $connexio = tancarBD($connexio);
+
     } catch (PDOException $e) {
-        //ROLLBACK
-        $connexio->rollback();
+        // Rollback en caso de error
+        if ($connexio) {
+            $connexio->rollback();
+        }
         echo "Error: " . $e->getMessage();
     } finally {
-        $connexio = tancarBD($connexio);
+        if ($connexio) {
+            $connexio = tancarBD($connexio);
+        }
     }
-
 }
+
 
 function actualitzar_projecte($nom, $descripcio, $data_inici, $data_fi, $id_projecte) {
     try {
