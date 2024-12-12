@@ -32,7 +32,7 @@ if (isset($_POST['register'])) {
 
 
 if (isset($_POST['guardar_projecte'])) {
-    guardar_projecte($_POST['nom'], $_POST['descripcio'], $_POST['data_inici'], $_POST['data_fi']);
+    guardar_projecte($_POST['nom'], $_POST['descripcio'], $_POST['data_inici'], $_POST['data_fi'], $_POST['colaboradors']);
     header('Location: ../htdocs/proyectos.html');
     exit();
 }

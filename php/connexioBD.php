@@ -82,9 +82,11 @@ function usuari_existent($nom, $email){
 
 }
 
-function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
+function guardar_projecte($nom, $descripcio, $data_inici, $data_fi,$colaboradors) {
 
     try {
+
+    $colaboradors = json_decode($colaboradors, true);
     $connexio = obrirBD();
 
     // Obrir transacció per poder fer mes d un insert a la vegada
@@ -114,6 +116,22 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi) {
     } else {
         throw new Exception("Aquest id no està a la sessió");
     }
+
+    $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) select :id_usuari, :id_projecte, :rol_usuari from dual where
+    not exists (select 1 from usuari_projecte_rol where id_projecte = :projecte_id and id_usuari = :id_usuari)";
+    $sentencia = $connexio->prepare($insertarSentencia);
+
+
+    foreach ($colaboradors as $id_usuari) { 
+
+        $sentencia->bindParam(':id_usuari', $id_usuari);
+        $sentencia->bindParam(':id_projecte', $id_projecte);
+        $rol_usuari = 2;
+        $sentencia->bindParam(':rol_usuari', $rol_usuari);
+
+        $sentencia->execute();
+    }
+
     //COMMIT
     $connexio->commit();
     $connexio = tancarBD($connexio);

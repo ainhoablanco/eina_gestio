@@ -218,6 +218,10 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.projecte{
+    height: 500px;
+}
+
 .projecte:hover, .tasca:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -225,9 +229,13 @@ body {
 
 /* Campos de proyecto */
 .nom-projecte,
+.nom-tasca,
 .descripcio-projecte,
+.descripcio-tasca,
 .data-inici,
-.data-fi {
+.data-fi,
+.colaboradors,
+.buscar-colaboradors {
     background-color: #f4f9f9;
     border: 1px solid #80c9c7;
     border-radius: 8px;
