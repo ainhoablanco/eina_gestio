@@ -4,6 +4,13 @@ const projectes = document.querySelector('.projectes');
 function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dataFi = '', esEdicio = false) {
     divProjecte.innerHTML = '';
 
+    const botoTancar = document.createElement('button');
+    botoTancar.textContent = 'X';
+    botoTancar.classList.add('btn-tancar');
+    botoTancar.addEventListener('click', () => {
+        divProjecte.remove();
+    });
+
     const form = document.createElement('form');
     form.action = '../php/controller.php';
     form.method = 'POST';
@@ -78,6 +85,7 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
 
                 const botoEliminar = document.createElement('button');
                 botoEliminar.textContent = '✖';
+                botoEliminar.classList.add('btn-eliminar');
                 botoEliminar.addEventListener('click', () => {
                     elementColaborador.remove();
                     actualitzarColaboradorsOcults();
@@ -131,6 +139,7 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     form.appendChild(colaboradorsOcults);
     form.appendChild(guardarBoto);
 
+    divProjecte.appendChild(botoTancar)
     divProjecte.appendChild(form);
 }
 

@@ -43,4 +43,10 @@ if (isset($_POST['actualitzar_projecte'])) {
     exit();
 }
 
+if (isset($_POST['eliminar_projecte'])) {
+    eliminar_projecte($_POST['id_projecte']);
+    header('Location: ../htdocs/proyectos.html');
+    exit();
+}
+
 ?>

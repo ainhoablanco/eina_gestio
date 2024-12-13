@@ -86,10 +86,8 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi, $colaborador
     try {
         $connexio = obrirBD();
 
-        // Iniciar transacción
         $connexio->beginTransaction();
 
-        // Insertar el proyecto
         $insertarSentencia = "insert into projecte (nom, descripcio, data_inici, data_fi) values (:nom, :descripcio, :data_inici, :data_fi)";
         $sentencia = $connexio->prepare($insertarSentencia);
 
@@ -100,10 +98,8 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi, $colaborador
 
         $sentencia->execute();
 
-        // Obtener el ID del proyecto
         $id_projecte = $connexio->lastInsertId();
 
-        // Insertar el primer usuario (el usuario actual en sesión)
         if (isset($_SESSION['id_usuari_actual'])) {
             $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) 
                                   select :id_usuari, :id_projecte, 1
@@ -119,39 +115,33 @@ function guardar_projecte($nom, $descripcio, $data_inici, $data_fi, $colaborador
             throw new Exception("El ID de usuario no está en la sesión");
         }
 
-        // Insertar los colaboradores adicionales
         if ($colaboradors) {
-            // Dividir los colaboradores
             $myArray = explode(',', $colaboradors);
 
             foreach ($myArray as $id_colaborador) {
-                // Verificar si la relación ya existe
                 $consulta = "select 1 from usuari_projecte_rol where id_usuari = :id_usuari and id_projecte = :id_projecte";
                 $sentencia = $connexio->prepare($consulta);
                 $sentencia->bindParam(':id_usuari', $id_colaborador);
                 $sentencia->bindParam(':id_projecte', $id_projecte);
                 $sentencia->execute();
 
-                // Si no existe, insertar la relación
                 if ($sentencia->rowCount() == 0) {
                     $insertarSentencia = "insert into usuari_projecte_rol (id_usuari, id_projecte, id_rol) 
                                           values (:id_usuari, :id_projecte, :id_rol)";
                     $sentencia = $connexio->prepare($insertarSentencia);
                     $sentencia->bindParam(':id_usuari', $id_colaborador);
                     $sentencia->bindParam(':id_projecte', $id_projecte);
-                    $id_rol = 2;  // Rol de colaborador
+                    $id_rol = 2;
                     $sentencia->bindParam(':id_rol', $id_rol);
                     $sentencia->execute();
                 }
             }
         }
 
-        // Commit de la transacción
         $connexio->commit();
         $connexio = tancarBD($connexio);
 
     } catch (PDOException $e) {
-        // Rollback en caso de error
         if ($connexio) {
             $connexio->rollback();
         }
@@ -183,5 +173,39 @@ function actualitzar_projecte($nom, $descripcio, $data_inici, $data_fi, $id_proj
         echo "Error al actualizar el proyecto: " . $e->getMessage();
     }
 }
+
+function eliminar_projecte($idProjecte) {
+    $connexio = null;
+    try {
+        $connexio = obrirBD();
+
+        $connexio->beginTransaction();
+
+        $eliminarUsuariProjecteRol = "delete from usuari_projecte_rol where id_projecte = :id_projecte";
+        $sentenciaUsuariProjecteRol = $connexio->prepare($eliminarUsuariProjecteRol);
+        $sentenciaUsuariProjecteRol->bindParam(':id_projecte', $idProjecte);
+        $sentenciaUsuariProjecteRol->execute();
+
+        $eliminarProjecte = "delete from projecte where id_projecte = :id_projecte";
+        $sentenciaProjecte = $connexio->prepare($eliminarProjecte);
+        $sentenciaProjecte->bindParam(':id_projecte', $idProjecte);
+        $sentenciaProjecte->execute();
+
+        $connexio->commit();
+
+    } catch (PDOException $e) {
+        if ($connexio) {
+            $connexio->rollback();
+        }
+        echo "Error en la base de datos: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        if ($connexio) {
+            tancarBD($connexio);
+        }
+    }
+}
+
 
 ?>

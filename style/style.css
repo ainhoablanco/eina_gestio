@@ -277,18 +277,6 @@ body {
     background-color: #f6f930cc;
 }
 
-.btn-eliminar{
-    background-color: #BBE6E4;
-    color: black;
-    border: solid 1px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-eliminar:hover{
-    background-color: #bbe6e4ce;
-}
-
 .btn-entrar{
     background-color: #f6f9309f;
     color: f6f930;
@@ -304,6 +292,31 @@ body {
 
 .btn-entrar:hover{
     background-color: #f6f930;
+}
+
+.btn-tancar, .btn-eliminarProjecte{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.btn-tancar, .btn-eliminar, .btn-eliminarProjecte {
+    background-color: #ff66b3ea;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover {
+    background-color: #ff66b3;
+    transform: scale(1.1);
 }
 
 .nom-projecte-guardat{

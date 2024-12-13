@@ -15,9 +15,24 @@ function mostrarProjectes(projectes) {
     const containerProjectes = document.querySelector('.projectes');
 
     projectes.forEach(projecte => {
+        const form = document.createElement('form');
+        form.action = '../php/controller.php';
+        form.method = 'POST';
+
+        const eliminarBoto = document.createElement('button');
+        eliminarBoto.type = 'submit';
+        eliminarBoto.textContent = 'X';
+        eliminarBoto.classList.add('btn-eliminarProjecte');
+        eliminarBoto.name = 'eliminar_projecte';
+        eliminarBoto.setAttribute('data-id', projecte.id_projecte);
+
+        const idProjecte = document.createElement('input');
+        idProjecte.type = 'hidden';
+        idProjecte.name = 'id_projecte';
+        idProjecte.value = projecte.id_projecte;
+
         const divProjecte = document.createElement('div');
         divProjecte.classList.add('projecte');
-        divProjecte.setAttribute("data-idProjecte", projecte.id_projecte);
 
         const nomProjecte = document.createElement('h3');
         nomProjecte.textContent = projecte.nom;
@@ -47,7 +62,10 @@ function mostrarProjectes(projectes) {
         entrarBoto.addEventListener('click', () => {
             window.location.href = '../htdocs/tasques.html';
         });
-
+        
+        form.appendChild(idProjecte);
+        form.appendChild(eliminarBoto);
+        divProjecte.appendChild(form);
         divProjecte.appendChild(nomProjecte);
         divProjecte.appendChild(descripcioProjecte);
         divProjecte.appendChild(editarBoto);
@@ -56,6 +74,7 @@ function mostrarProjectes(projectes) {
         containerProjectes.appendChild(divProjecte);
     });
 }
+
 
 
 const projecteNou2 = document.getElementById('afegir-projecte');
