@@ -24,7 +24,7 @@ function mostrarProjectes(projectes) {
         eliminarBoto.textContent = 'X';
         eliminarBoto.classList.add('btn-eliminarProjecte');
         eliminarBoto.name = 'eliminar_projecte';
-        eliminarBoto.setAttribute('data-id', projecte.id_projecte);
+        eliminarBoto.setAttribute('data-id', projecte.id_projecte);    
 
         const idProjecte = document.createElement('input');
         idProjecte.type = 'hidden';
@@ -59,8 +59,9 @@ function mostrarProjectes(projectes) {
             actualitzarCamps(nouDivProjecte, projecte.nom, projecte.descripcio, projecte.data_inici, projecte.data_fi, projecte.id_projecte);
         });
 
-        entrarBoto.addEventListener('click', () => {
+        entrarBoto.addEventListener('click', (event) => {
             window.location.href = '../htdocs/tasques.html';
+            // sessionStorage.setItem('id_projecte', event.target.getAttribute('data-id'));
         });
         
         form.appendChild(idProjecte);
