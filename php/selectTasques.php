@@ -3,8 +3,6 @@
 require_once('connexioBD.php');
 header('Content-Type: application/json');
 
-// $id_projecte = isset($_GET['id_projecte']) ? $_GET['id_projecte'] : null;
-
 try {
     $connexio = obrirBD();
 
@@ -12,9 +10,8 @@ try {
 
     $sentencia = $connexio->prepare($consulta);
 
-    $id_projecte = 55;
     $sentencia->bindParam(':id_usuari', $_SESSION['id_usuari_actual']);
-    $sentencia->bindParam(':id_projecte', $id_projecte);
+    $sentencia->bindParam(':id_projecte',  $_SESSION['id_projecte']);
 
     $sentencia->execute();
 

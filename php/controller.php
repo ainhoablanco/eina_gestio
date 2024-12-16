@@ -30,7 +30,6 @@ if (isset($_POST['register'])) {
     }
 }
 
-
 if (isset($_POST['guardar_projecte'])) {
     guardar_projecte($_POST['nom'], $_POST['descripcio'], $_POST['data_inici'], $_POST['data_fi'], $_POST['colaboradors']);
     header('Location: ../htdocs/proyectos.html');
@@ -46,6 +45,11 @@ if (isset($_POST['actualitzar_projecte'])) {
 if (isset($_POST['eliminar_projecte'])) {
     eliminar_projecte($_POST['id_projecte']);
     header('Location: ../htdocs/proyectos.html');
+    exit();
+}
+
+if (isset($_POST['entrar'])) {
+    $_SESSION['id_projecte'] = $_POST['entrar'];
     exit();
 }
 

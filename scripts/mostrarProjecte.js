@@ -51,6 +51,8 @@ function mostrarProjectes(projectes) {
         const entrarBoto = document.createElement('button');
         entrarBoto.type = 'button';
         entrarBoto.textContent = 'ENTRAR';
+        entrarBoto.name = 'entrar';
+        entrarBoto.value = projecte.id_projecte;
         entrarBoto.classList.add('btn-entrar');
 
         editarBoto.addEventListener('click', () => {
@@ -61,7 +63,6 @@ function mostrarProjectes(projectes) {
 
         entrarBoto.addEventListener('click', (event) => {
             window.location.href = '../htdocs/tasques.html';
-            // sessionStorage.setItem('id_projecte', event.target.getAttribute('data-id'));
         });
         
         form.appendChild(idProjecte);
