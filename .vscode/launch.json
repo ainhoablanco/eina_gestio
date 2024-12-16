@@ -15,7 +15,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:80/eina_gestio/index.html",
+            "url": "http://localhost:80/EinaGestio/einaGestio/index.html",
             "webRoot": "${workspaceFolder}"
         }
     

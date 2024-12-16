@@ -61,10 +61,12 @@ function mostrarProjectes(projectes) {
             actualitzarCamps(nouDivProjecte, projecte.nom, projecte.descripcio, projecte.data_inici, projecte.data_fi, projecte.id_projecte);
         });
 
-        entrarBoto.addEventListener('click', (event) => {
-            window.location.href = '../htdocs/tasques.html';
+        entrarBoto.addEventListener('click', () => {
+            const inputIdProjecte = document.getElementById('input-id-projecte');
+            inputIdProjecte.value = projecte.id_projecte;
+            document.getElementById('form-entrar').submit();
         });
-        
+
         form.appendChild(idProjecte);
         form.appendChild(eliminarBoto);
         divProjecte.appendChild(form);
@@ -88,6 +90,15 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     const form = document.createElement('form');
     form.action = '../php/controller.php';
     form.method = 'POST';
+
+    const eliminarBoto = document.createElement('button');
+    eliminarBoto.type = 'submit';
+    eliminarBoto.textContent = 'X';
+    eliminarBoto.classList.add('btn-eliminarProjecte');
+
+    eliminarBoto.addEventListener('click', () => {
+        form.remove();
+    });
 
     const nomProjecte = document.createElement('input');
     nomProjecte.type = 'text';
@@ -137,6 +148,7 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
         }
     });
 
+    form.appendChild(eliminarBoto);
     form.appendChild(nomProjecte);
     form.appendChild(descripcioProjecte);
     form.appendChild(dataIniciProjecte);

@@ -1,5 +1,6 @@
 <?php
 
+
 require_once('connexioBD.php');
 header('Content-Type: application/json');
 
@@ -11,7 +12,7 @@ try {
     $sentencia = $connexio->prepare($consulta);
 
     $sentencia->bindParam(':id_usuari', $_SESSION['id_usuari_actual']);
-    $sentencia->bindParam(':id_projecte',  $_SESSION['id_projecte']);
+    $sentencia->bindParam(':id_projecte', $_SESSION['id_projecte']);
 
     $sentencia->execute();
 

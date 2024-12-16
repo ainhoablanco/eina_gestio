@@ -68,7 +68,7 @@ function mostrarTasques(tasques) {
     });
 }
 
-const tascaNova = document.getElementById('afegir-tasca');
+const tascaNova2 = document.getElementById('afegir-tasca');
 const tasquesContainer = document.querySelector('.tasques');
 
 function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', dataFi = '', idTasca = '') {
@@ -77,6 +77,15 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
     const form = document.createElement('form');
     form.action = '../php/controller.php';
     form.method = 'POST';
+
+    const eliminarBoto = document.createElement('button');
+    eliminarBoto.type = 'submit';
+    eliminarBoto.textContent = 'X';
+    eliminarBoto.classList.add('btn-eliminarTasca');
+
+    eliminarBoto.addEventListener('click', () => {
+        form.remove();
+    });
 
     const nomTasca = document.createElement('input');
     nomTasca.type = 'text';

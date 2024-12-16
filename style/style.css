@@ -294,13 +294,13 @@ body {
     background-color: #f6f930;
 }
 
-.btn-tancar, .btn-eliminarProjecte{
+.btn-tancar, .btn-eliminarProjecte, .btn-eliminarTasca{
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.btn-tancar, .btn-eliminar, .btn-eliminarProjecte {
+.btn-tancar, .btn-eliminar, .btn-eliminarProjecte, .btn-eliminarTasca {
     background-color: #ff66b3ea;
     border: none;
     border-radius: 50%;
@@ -314,12 +314,12 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover {
+.btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover, .btn-eliminarTasca:hover {
     background-color: #ff66b3;
     transform: scale(1.1);
 }
 
-.nom-projecte-guardat{
+.nom-projecte-guardat, .nom-tasca-guardat {
     color: #ff66b3;
     font-size: 30px;
 }

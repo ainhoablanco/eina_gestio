@@ -52,6 +52,7 @@ function login($name, $password){
     
     $sentencia->bindParam(':name', $name);
     $sentencia->execute();
+    // $_SESSION['id_usuaris'] = lastInsertId();
 
     $resultat = $sentencia->fetch(PDO::FETCH_ASSOC);
 

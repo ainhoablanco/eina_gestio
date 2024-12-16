@@ -31,6 +31,12 @@
         </div>
     </div>
 
+    <!-- Añadimos el formulario y el botón de enviar -->
+    <form id="form-entrar" action="../php/controller.php" method="POST">
+        <input type="hidden" name="id_projecte" id="input-id-projecte">
+        <button type="submit" name="entrar" id="btn-entrar" style="display:none">ENTRAR</button>
+    </form>
+
     <script src="../scripts/nouprojecte.js"></script>
     <script src="../scripts/mostrarProjecte.js"></script>
 </body>
