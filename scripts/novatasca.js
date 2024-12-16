@@ -47,10 +47,10 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
 
     const seleccionarEncarregat = document.createElement('select');
     seleccionarEncarregat.name = 'encarregat_select';
-    seleccionarEncarregat.classList.add('encarregat');
+    seleccionarEncarregat.classList.add('colaboradors');
 
     const encarregatSeleccionat = document.createElement('div');
-    encarregatSeleccionat.classList.add('encarregat-seleccionat');
+    encarregatSeleccionat.classList.add('colaboradors-seleccionats');
 
     const encarregatOcult = document.createElement('input');
     encarregatOcult.type = 'hidden';
@@ -58,7 +58,7 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     encarregatOcult.value = '';
 
     function carregarEncarregats(cerca = '') {
-        fetch(`../php/selectColaboradors.php?lletra=${cerca}`)
+        fetch(`../php/selectColaboradorsProjecte.php?lletra=${cerca}`)
             .then(response => response.json())
             .then(encarregats => {
                 seleccionarEncarregat.innerHTML = '';
