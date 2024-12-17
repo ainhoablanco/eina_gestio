@@ -1,5 +1,4 @@
 <?php
-session_start(); // Iniciar la sesión
 include('connexioBD.php');
 header('Content-Type: application/json');
 
@@ -14,17 +13,16 @@ try {
     $idProjecte = $_SESSION['id_projecte'];
     $lletra = isset($_GET['lletra']) ? $_GET['lletra'] : '';
 
-    $consulta = "select u.id_usuari, u.nom_usuari from usuari as u
-                 join projecte_usuari pu ON u.id_usuari = pu.id_usuari
-                 where pu.id_projecte = :id_projecte 
-                 and u.nom_usuari like :lletra
-                 and pu.id_usuari = :id_usuari";
-
+    $consulta = "select u.id_usuari, u.nom_usuari
+    from usuari as u
+    join usuari_projecte_rol as upr on u.id_usuari = upr.id_usuari
+    where upr.id_projecte = :id_projecte
+    and u.nom_usuari like :lletra";
+    
     $sentencia = $connexio->prepare($consulta);
     $sentencia->bindValue(':id_projecte', $idProjecte, PDO::PARAM_INT);
-    $sentencia->bindValue(':id_usuari', $idUsuari, PDO::PARAM_INT);
     $sentencia->bindValue(':lletra', "%$lletra%", PDO::PARAM_STR);
-    $sentencia->execute();
+    $sentencia->execute();    
 
     $resultat = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     

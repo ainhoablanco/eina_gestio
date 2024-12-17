@@ -179,7 +179,7 @@ body {
     color: #ff66b3;
     transition: color 0.3s ease;
     width: 280px;
-    height: 300px;
+    height: 500px;
 }
 
 #afegir-projecte:hover, #afegir-tasca:hover {
@@ -208,7 +208,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 280px;
-    height: 400px;
+    height: 500px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: 1.2rem;
@@ -235,7 +235,8 @@ body {
 .data-inici,
 .data-fi,
 .colaboradors,
-.buscar-colaboradors {
+.buscar-colaboradors,
+.buscar-encarregat {
     background-color: #f4f9f9;
     border: 1px solid #80c9c7;
     border-radius: 8px;
