@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
-    fetch('../php/selectProjecte.php')
+    fetch('/htdocs/php/selectProjecte.php')
         .then (function (resposta) {
             return resposta.json();
         })
@@ -9,6 +9,20 @@ window.addEventListener('load', () => {
         .catch(error => {
             console.error('Hi ha hagut un error:', error);
         });
+
+    const logoutButton = document.getElementById("logout-button");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", () => {
+            localStorage.clear();
+            sessionStorage.clear();
+            document.cookie.split(";").forEach(cookie => {
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            });
+            window.location.href = "/htdocs/index.html";
+        });
+    }
 });
 
 function mostrarProjectes(projectes) {
@@ -16,7 +30,7 @@ function mostrarProjectes(projectes) {
 
     projectes.forEach(projecte => {
         const form = document.createElement('form');
-        form.action = '../php/controller.php';
+        form.action = '/htdocs/php/controller.php';
         form.method = 'POST';
 
         const eliminarBoto = document.createElement('button');
@@ -79,8 +93,6 @@ function mostrarProjectes(projectes) {
     });
 }
 
-
-
 const projecteNou2 = document.getElementById('afegir-projecte');
 const projectes2 = document.querySelector('.projectes');
 
@@ -88,7 +100,7 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     divProjecte.innerHTML = '';
 
     const form = document.createElement('form');
-    form.action = '../php/controller.php';
+    form.action = '/htdocs/php/controller.php';
     form.method = 'POST';
 
     const eliminarBoto = document.createElement('button');
@@ -139,12 +151,18 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     form.addEventListener('submit', (event) => {
         const nom = nomProjecte.value.trim();
         const descripcio = descripcioProjecte.value.trim();
-        const dataInici = dataIniciProjecte.value;
-        const dataFi = dataFiProjecte.value;
+        const dataInici = new Date(dataIniciProjecte.value);
+        const dataFi = new Date(dataFiProjecte.value);
 
         if (!nom || !descripcio || !dataInici || !dataFi) {
             event.preventDefault();
             alert('Hi ha algun camp incomplert');
+            return;
+        }
+
+        if (dataFi < dataInici) { 
+            event.preventDefault(); 
+            alert('La data final no pot ser menor que la data inicial'); 
         }
     });
 

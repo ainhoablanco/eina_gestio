@@ -1,31 +1,31 @@
 const tascaNova = document.getElementById('afegir-tasca');
-const tasques = document.querySelector('.tasques');
+const formTascaContainer = document.getElementById('form-tasca-container');
 
-function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', dataFi = '', encarregat = '') {
+function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', dataFi = '', encarregat = '', estat = 'Pendent') {
     divTasca.innerHTML = '';
 
     const botoTancar = document.createElement('button');
     botoTancar.textContent = 'X';
-    botoTancar.classList.add('btn-tancar');
+    botoTancar.classList.add('btn-tancar-tasca');
     botoTancar.addEventListener('click', () => {
         divTasca.remove();
     });
 
     const form = document.createElement('form');
-    form.action = '../php/controller.php';
+    form.action = '/htdocs/php/controller.php';
     form.method = 'POST';
 
     const nomTasca = document.createElement('input');
     nomTasca.type = 'text';
     nomTasca.name = 'nom';
     nomTasca.placeholder = 'Nom de la tasca';
-    nomTasca.classList.add('nom-tasca');
+    nomTasca.classList.add('nom-projecte');
     nomTasca.value = nom;
 
     const descripcioTasca = document.createElement('textarea');
     descripcioTasca.name = 'descripcio';
     descripcioTasca.placeholder = 'Descripció de la tasca';
-    descripcioTasca.classList.add('descripcio-tasca');
+    descripcioTasca.classList.add('descripcio-projecte');
     descripcioTasca.value = descripcio;
 
     const dataIniciTasca = document.createElement('input');
@@ -40,11 +40,6 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     dataFiTasca.classList.add('data-fi');
     dataFiTasca.value = dataFi;
 
-    const buscarEncarregat = document.createElement('input');
-    buscarEncarregat.type = 'text';
-    buscarEncarregat.placeholder = 'Buscar encarregat';
-    buscarEncarregat.classList.add('buscar-encarregat');
-
     const seleccionarEncarregat = document.createElement('select');
     seleccionarEncarregat.name = 'encarregat_select';
     seleccionarEncarregat.classList.add('colaboradors');
@@ -55,10 +50,10 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     const encarregatOcult = document.createElement('input');
     encarregatOcult.type = 'hidden';
     encarregatOcult.name = 'encarregat';
-    encarregatOcult.value = '';
+    encarregatOcult.value = encarregat;
 
-    function carregarEncarregats(cerca = '') {
-        fetch(`../php/selectColaboradorsProjecte.php?lletra=${cerca}`)
+    function carregarEncarregats() {
+        fetch('/htdocs/php/selectColaboradorsProjecte.php')
             .then(response => response.json())
             .then(encarregats => {
                 seleccionarEncarregat.innerHTML = '';
@@ -76,7 +71,7 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     function actualitzarEncarregatSeleccionat() {
         const opcioSeleccionada = seleccionarEncarregat.selectedOptions[0];
         if (opcioSeleccionada && !encarregatSeleccionat.querySelector(`[data-id="${opcioSeleccionada.value}"]`)) {
-            encarregatSeleccionat.innerHTML = ''; // Limpiar selección previa
+            encarregatSeleccionat.innerHTML = '';
             const elementEncarregat = document.createElement('span');
             elementEncarregat.textContent = opcioSeleccionada.textContent;
             elementEncarregat.dataset.id = opcioSeleccionada.value;
@@ -96,13 +91,30 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
         }
     }
 
-    buscarEncarregat.addEventListener('input', (e) => {
-        carregarEncarregats(e.target.value);
-    });
-
     seleccionarEncarregat.addEventListener('change', actualitzarEncarregatSeleccionat);
 
     carregarEncarregats();
+
+    const h3Encarregat = document.createElement('h3');
+    h3Encarregat.textContent = 'Encarregat';
+
+    const h3Estat = document.createElement('h3');
+    h3Estat.textContent = 'Estat';
+
+    const seleccionarEstat = document.createElement('select');
+    seleccionarEstat.name = 'estat';
+    seleccionarEstat.classList.add('estat-tasca');
+    
+    const opcionsEstat = ['Pendent', 'En Progres', 'Completada'];
+    opcionsEstat.forEach((estado, index) => {
+        const opcioEstat = document.createElement('option');
+        opcioEstat.value = index + 1;
+        opcioEstat.textContent = estado;
+        if (estado === estat) {
+            opcioEstat.selected = true;
+        }
+        seleccionarEstat.appendChild(opcioEstat);
+    });    
 
     const guardarBoto = document.createElement('button');
     guardarBoto.type = 'submit';
@@ -113,12 +125,18 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     form.addEventListener('submit', (event) => {
         const nom = nomTasca.value.trim();
         const descripcio = descripcioTasca.value.trim();
-        const dataInici = dataIniciTasca.value;
-        const dataFi = dataFiTasca.value;
+        const dataInici = new Date(dataIniciTasca.value);
+        const dataFi = new Date(dataFiTasca.value);
 
         if (!nom || !descripcio || !dataInici || !dataFi || !encarregatOcult.value) {
             event.preventDefault();
             alert('Hi ha algun camp incomplert');
+            return;
+        }
+
+        if (dataFi < dataInici) { 
+            event.preventDefault(); 
+            alert('La data final no pot ser menor que la data inicial'); 
         }
     });
 
@@ -126,10 +144,12 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     form.appendChild(descripcioTasca);
     form.appendChild(dataIniciTasca);
     form.appendChild(dataFiTasca);
-    form.appendChild(buscarEncarregat);
+    form.appendChild(h3Encarregat);
     form.appendChild(seleccionarEncarregat);
     form.appendChild(encarregatSeleccionat);
     form.appendChild(encarregatOcult);
+    form.appendChild(h3Estat);
+    form.appendChild(seleccionarEstat);
     form.appendChild(guardarBoto);
 
     divTasca.appendChild(botoTancar);
@@ -138,8 +158,8 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
 
 tascaNova.addEventListener('click', () => {
     const nouDivTasca = document.createElement('div');
-    nouDivTasca.classList.add('tasca');
-
+    nouDivTasca.classList.add('nova-tasca');
     afegirCampsTasca(nouDivTasca);
-    tasques.appendChild(nouDivTasca);
+    formTascaContainer.innerHTML = '';
+    formTascaContainer.appendChild(nouDivTasca);
 });

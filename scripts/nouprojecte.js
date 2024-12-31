@@ -12,7 +12,7 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     });
 
     const form = document.createElement('form');
-    form.action = '../php/controller.php';
+    form.action = '/htdocs/php/controller.php';
     form.method = 'POST';
 
     const nomProjecte = document.createElement('input');
@@ -59,7 +59,7 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     colaboradorsOcults.value = '';
 
     function carregarColaboradors(cerca = '') {
-        fetch(`../php/selectColaboradors.php?lletra=${cerca}`)
+        fetch(`/htdocs/php/selectColaboradors.php?lletra=${cerca}`)
             .then(response => response.json())
             .then(colaboradors => {
                 seleccionarColaboradors.innerHTML = '';
@@ -120,12 +120,17 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     form.addEventListener('submit', (event) => {
         const nom = nomProjecte.value.trim();
         const descripcio = descripcioProjecte.value.trim();
-        const dataInici = dataIniciProjecte.value;
-        const dataFi = dataFiProjecte.value;
+        const dataInici = new Date(dataIniciProjecte.value);
+        const dataFi = new Date(dataFiProjecte.value);
 
         if (!nom || !descripcio || !dataInici || !dataFi) {
             event.preventDefault();
             alert('Hi ha algun camp incomplert');
+        }
+
+        if (dataFi < dataInici) { 
+            event.preventDefault(); 
+            alert('La data final no pot ser menor que la data inicial'); 
         }
     });
 
@@ -139,10 +144,9 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     form.appendChild(colaboradorsOcults);
     form.appendChild(guardarBoto);
 
-    divProjecte.appendChild(botoTancar)
+    divProjecte.appendChild(botoTancar);
     divProjecte.appendChild(form);
 }
-
 
 projecteNou.addEventListener('click', () => {
     const nouDivProjecte = document.createElement('div');

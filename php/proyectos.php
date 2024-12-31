@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyectos</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="/htdocs/style/style.css">
 </head>
 
 <body id="body-proyectos">
+
+    <div id="header">
+        <button id="logout-button">Tancar sessió</button>
+    </div>
+
     <img id="imatge-logo" src="../imatges/logoAinTask.png" alt="logo">
     <div class="pantalla-principal-proyectos"></div>
     <div id="titol-animat" class="contenidor-titol">
@@ -31,14 +36,13 @@
         </div>
     </div>
 
-    <!-- Añadimos el formulario y el botón de enviar -->
     <form id="form-entrar" action="../php/controller.php" method="POST">
         <input type="hidden" name="id_projecte" id="input-id-projecte">
         <button type="submit" name="entrar" id="btn-entrar" style="display:none">ENTRAR</button>
     </form>
 
-    <script src="../scripts/nouprojecte.js"></script>
-    <script src="../scripts/mostrarProjecte.js"></script>
+    <script src="/htdocs/scripts/nouprojecte.js"></script>
+    <script src="/htdocs/scripts/mostrarProjecte.js"></script>
 </body>
 
 </html>

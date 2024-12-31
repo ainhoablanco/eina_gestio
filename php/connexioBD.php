@@ -12,6 +12,16 @@ function obrirBD(){
     $connexio->exec("SET NAMES 'utf8'");
 
     return $connexio;
+
+    // $servername = "sql206.byethost31.com";
+    // $username = "b31_37391808";
+    // $pass = "t3d8hjw6";
+
+    // $connexio = new PDO("mysql:host=$servername;dbname=b31_37391808_einagestio", $username, $pass);
+    // $connexio->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // $connexio->exec("SET NAMES 'utf8'");
+
+    // return $connexio;
 }
 
 function tancarBD($connexio) {
@@ -201,6 +211,96 @@ function eliminar_projecte($idProjecte) {
         echo "Error en la base de datos: " . $e->getMessage();
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+    } finally {
+        if ($connexio) {
+            tancarBD($connexio);
+        }
+    }
+}
+
+function guardar_tasca($nom, $descripcio, $data_inici, $data_fi, $estat, $encarregat) {
+    try {
+        $connexio = obrirBD();
+
+        $connexio->beginTransaction();
+
+        $insertarSentencia = "insert into tasca (nom, descripcio, data_inici, data_fi, id_projecte, id_estat, id_usuari, id_encarregat) values (:nom, :descripcio, :data_inici, :data_fi, :id_projecte, :id_estat, :id_usuari, :id_encarregat)";
+        $sentencia = $connexio->prepare($insertarSentencia);
+
+        $sentencia->bindParam(':nom', $nom);
+        $sentencia->bindParam(':descripcio', $descripcio);
+        $sentencia->bindParam(':data_inici', $data_inici);
+        $sentencia->bindParam(':data_fi', $data_fi);
+        $sentencia->bindParam(':id_projecte', $_SESSION['id_projecte']);
+        $sentencia->bindParam(':id_estat', $estat);
+        $sentencia->bindParam(':id_usuari', $_SESSION['id_usuari_actual']);
+        $sentencia->bindParam(':id_encarregat', $encarregat);
+
+        $sentencia->execute();
+
+        $connexio->commit();
+        $connexio = tancarBD($connexio);
+
+    } catch (PDOException $e) {
+        $connexio->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function actualitzar_tasca($nom, $descripcio, $data_inici, $data_fi, $estat, $encarregat, $id_tasca) {
+    try {
+        $connexio = obrirBD();
+
+        $connexio->beginTransaction();
+
+        $insertarSentencia = "update tasca 
+                                 set nom = :nom, 
+                                     descripcio = :descripcio, 
+                                     data_inici = :data_inici, 
+                                     data_fi = :data_fi, 
+                                     id_estat = :id_estat, 
+                                     id_encarregat = :id_encarregat 
+                                 where id_tasca = :id_tasca";
+        $sentencia = $connexio->prepare($insertarSentencia);
+
+        $sentencia->bindParam(':nom', $nom);
+        $sentencia->bindParam(':descripcio', $descripcio);
+        $sentencia->bindParam(':data_inici', $data_inici);
+        $sentencia->bindParam(':data_fi', $data_fi);
+        $sentencia->bindParam(':id_estat', $estat);
+        $sentencia->bindParam(':id_encarregat', $encarregat);
+        $sentencia->bindParam(':id_tasca', $id_tasca);
+
+        $sentencia->execute();
+
+        $connexio->commit();
+        $connexio = tancarBD($connexio);
+
+    } catch (PDOException $e) {
+        $connexio->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function eliminar_tasca($id_tasca) {
+    $connexio = null;
+    try {
+        $connexio = obrirBD();
+        $connexio->beginTransaction();
+
+        $eliminarTasca = "delete from tasca where id_tasca = :id_tasca";
+        $sentenciaTasca = $connexio->prepare($eliminarTasca);
+
+        $sentenciaTasca->bindParam(':id_tasca', $id_tasca);
+        $sentenciaTasca->execute();
+
+        $connexio->commit();
+
+    } catch (PDOException $e) {
+        if ($connexio) {
+            $connexio->rollBack();
+        }
+        echo "Error en la eliminación de la tarea: " . $e->getMessage();
     } finally {
         if ($connexio) {
             tancarBD($connexio);

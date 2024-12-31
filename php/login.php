@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sessió - AinTask</title>
-    <link rel="stylesheet" href="../style/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="/htdocs/style/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/htdocs/style/style.css">
 </head>
 
 <body class="body-formularis">
-    <img id="imatge-logo" src="../imatges/logoAinTask.png" alt="logo">
+    <img id="imatge-logo" src="/htdocs/imatges/logoAinTask.png" alt="logo">
     <div class="pantalla-formulari">
         <div class="formulari-container login-formulari">
             <h2>Iniciar Sessió</h2>
 
-            <form action="../php/controller.php" method="POST">
+            <form action="/htdocs/php/controller.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="formulari-label">Nom d'usuari</label>
                     <input type="text" class="formulari-control" id="username" name="name" required>

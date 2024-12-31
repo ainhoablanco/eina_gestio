@@ -165,13 +165,13 @@ body {
 }
 
 /* Botón añadir proyecto */
-.nou-projecte, .nova-tasca {
+.nou-projecte {
     background-color: transparent;
     border-radius: 8px;
     text-align: center;
 }
 
-#afegir-projecte, #afegir-tasca {
+#afegir-projecte {
     font-size: 3rem;
     background: none;
     border: none;
@@ -182,12 +182,12 @@ body {
     height: 500px;
 }
 
-#afegir-projecte:hover, #afegir-tasca:hover {
+#afegir-projecte:hover {
     color: #ff3a99;
 }
 
 /* Contenedor de proyectos */
-.projectes, .tasques {
+.projectes {
     background-color: #bbe6e4d2;
     border-radius: 8px;
     width: 90%;
@@ -200,7 +200,7 @@ body {
 }
 
 /* Cada proyecto */
-.projecte, .tasca {
+.projecte {
     background-color: #BBE6E4;
     color: black;
     display: flex;
@@ -222,19 +222,18 @@ body {
     height: 500px;
 }
 
-.projecte:hover, .tasca:hover {
+.projecte:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Campos de proyecto */
 .nom-projecte,
-.nom-tasca,
 .descripcio-projecte,
-.descripcio-tasca,
 .data-inici,
 .data-fi,
 .colaboradors,
+.estat-tasca,
 .buscar-colaboradors,
 .buscar-encarregat {
     background-color: #f4f9f9;
@@ -295,13 +294,13 @@ body {
     background-color: #f6f930;
 }
 
-.btn-tancar, .btn-eliminarProjecte, .btn-eliminarTasca{
+.btn-tancar, .btn-eliminarProjecte{
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.btn-tancar, .btn-eliminar, .btn-eliminarProjecte, .btn-eliminarTasca {
+.btn-tancar, .btn-eliminar, .btn-eliminarProjecte, .btn-tancar-tasca, .btn-eliminarTasca {
     background-color: #ff66b3ea;
     border: none;
     border-radius: 50%;
@@ -315,12 +314,16 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover, .btn-eliminarTasca:hover {
+.btn-tancar-tasca{
+margin-bottom: 3px;
+}
+
+.btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover, .btn-tancar-tasca:hover, .btn-eliminarTasca:hover {
     background-color: #ff66b3;
     transform: scale(1.1);
 }
 
-.nom-projecte-guardat, .nom-tasca-guardat {
+.nom-projecte-guardat {
     color: #ff66b3;
     font-size: 30px;
 }
@@ -328,4 +331,110 @@ body {
 .error-message{
     color: red;
     padding-top: 10px;
+}
+
+#body-tasques {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#form-tasca-container{
+    width: 50%;
+}
+
+.titol-columna {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ff66b3;
+}
+
+.tasques {
+    border-radius: 10px;
+    background-color: #bbe6e4d2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.nova-tasca {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #BBE6E4;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#afegir-tasca {
+    font-size: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff66b3;
+    transition: color 0.3s ease;
+}
+
+#afegir-tasca:hover {
+    color: #ff3a99;
+}
+
+.columnes-tasques {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.columna {
+    flex: 1;
+    background-color: #BBE6E4;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tasca {
+    margin: 10px;
+    border: 1px solid #ff66b3;
+    color: #2f2f2f;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 10px;
+}
+
+.tasca:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#logout-button {
+    background-color: #f6f930;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#logout-button:hover {
+    background-color: #f6f930d0;
 }
