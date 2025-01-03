@@ -27,7 +27,7 @@
         <span class="letter" style="--x:-0.5; --y:0.5; --delay:3">e</span>
         <span class="letter" style="--x:2; --y:1.5; --delay:6">s</span>
     </div>
-    </div>
+
     <div class="projectes">
         <div class="projecte">
             <div class="nou-projecte">

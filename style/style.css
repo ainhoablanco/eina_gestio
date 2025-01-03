@@ -118,23 +118,18 @@ body {
     text-align: center;
     padding-bottom: 20px;
     color: #2f2f2f;
-    /* Texto oscuro para buen contraste */
 }
 
 /* ETIQUETAS */
 .formulari-label {
     color: #2f2f2f;
-    /* Texto oscuro para etiquetas */
 }
 
 /* CAMPOS DE CONTROL */
 .formulari-control {
     background-color: #d6f3f2;
-    /* Fondo más claro para campos de entrada */
     border: 1px solid #80c9c7;
-    /* Borde acorde al formulario */
     color: #2f2f2f;
-    /* Texto oscuro */
     border-radius: 8px;
     width: 100%;
     padding: 8px;
@@ -147,9 +142,7 @@ body {
     display: block;
     margin: 0 auto;
     background-color: #80c9c7;
-    /* Fondo de los botones */
     color: #ffffff;
-    /* Texto blanco */
     border: none;
     padding: 10px 15px;
     font-size: 1rem;
@@ -161,7 +154,6 @@ body {
 .btn.boto-loggin-pg:hover,
 .btn.boto-register-pg:hover {
     background-color: #6ab0ae;
-    /* Fondo más oscuro al pasar el ratón */
 }
 
 /* Botón añadir proyecto */
@@ -200,7 +192,7 @@ body {
 }
 
 /* Cada proyecto */
-.projecte {
+.projecte, .nou-projecte {
     background-color: #BBE6E4;
     color: black;
     display: flex;
@@ -218,13 +210,22 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.projecte{
-    height: 500px;
-}
-
 .projecte:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.p-data-inici, .p-data-fi, 
+.p-nom-projecte, 
+.p-descripcio-projecte, 
+.p-estat, 
+.p-encarregat, 
+.p-nom-tasca,
+.p-encarregat, 
+.p-descripcio-tasca{
+    font-size: 1rem;
+    color: #2f2f2f;
+    margin-top: 0px;
 }
 
 /* Campos de proyecto */
@@ -425,7 +426,9 @@ margin-bottom: 3px;
     padding: 10px;
 }
 
-#logout-button {
+#logout-button, #back-button {
+    margin-top: 40px;
+    margin-right: 40px;
     background-color: #f6f930;
     color: rgb(0, 0, 0);
     border: none;
@@ -435,6 +438,11 @@ margin-bottom: 3px;
     cursor: pointer;
 }
 
-#logout-button:hover {
+#back-button {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+#logout-button:hover, #back-button:hover {
     background-color: #f6f930d0;
 }

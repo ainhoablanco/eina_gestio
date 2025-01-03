@@ -76,7 +76,7 @@ function mostrarTasques(tasques) {
 
         editarBoto.addEventListener('click', () => {
             const nouDivTasca = document.createElement('div');
-            nouDivTasca.classList.add('tasca');
+            nouDivTasca.classList.add('nova-tasca');
             actualitzarCamps(nouDivTasca, tasca.nom, tasca.descripcio, tasca.data_inici, tasca.data_fi, tasca.id_encarregat, tasca.id_estat, tasca.id_tasca);
         });
 
@@ -100,8 +100,16 @@ function mostrarTasques(tasques) {
 
 const tasquesContainer2 = document.getElementById('form-tasca-container');
 
-function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', dataFi = '', encarregat = '', estat = 'Pendent', idTasca = '') {
+function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', dataFi = '', encarregat = '', estat = '', idTasca = '') {
+    
+    const formularioExistente = document.querySelector(`.nova-tasca-editar[data-id="${idTasca}"]`);
+    if (formularioExistente) {
+        return;
+    }
+
     divTasca.innerHTML = '';
+    divTasca.classList.add('nova-tasca-editar');
+    divTasca.setAttribute('data-id', idTasca);
 
     const botoTancar = document.createElement('button');
     botoTancar.textContent = 'X';
@@ -114,6 +122,10 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
     form.action = '/htdocs/php/controller.php';
     form.method = 'POST';
 
+    const pNomTasca = document.createElement('p');
+    pNomTasca.textContent = 'Nom de la tasca:';
+    pNomTasca.classList.add('p-nom-tasca');
+
     const nomTasca = document.createElement('input');
     nomTasca.type = 'text';
     nomTasca.name = 'nom';
@@ -121,11 +133,19 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
     nomTasca.classList.add('nom-projecte');
     nomTasca.value = nom;
 
+    const pDescripcioTasca = document.createElement('p');
+    pDescripcioTasca.textContent = 'Descripció de la tasca:';
+    pDescripcioTasca.classList.add('p-descripcio-tasca');
+
     const descripcioTasca = document.createElement('textarea');
     descripcioTasca.name = 'descripcio';
     descripcioTasca.placeholder = 'Descripció de la tasca';
     descripcioTasca.classList.add('descripcio-projecte');
     descripcioTasca.value = descripcio;
+
+    const pDataInici = document.createElement('p');
+    pDataInici.textContent = 'Data d\'inici:';
+    pDataInici.classList.add('p-data-inici');
 
     const dataIniciTasca = document.createElement('input');
     dataIniciTasca.type = 'date';
@@ -133,11 +153,19 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
     dataIniciTasca.classList.add('data-inici');
     dataIniciTasca.value = dataInici;
 
+    const pDataFi = document.createElement('p');
+    pDataFi.textContent = 'Data de fi:';
+    pDataFi.classList.add('p-data-fi');
+
     const dataFiTasca = document.createElement('input');
     dataFiTasca.type = 'date';
     dataFiTasca.name = 'data_fi';
     dataFiTasca.classList.add('data-fi');
     dataFiTasca.value = dataFi;
+
+    const pEncarregat = document.createElement('p');
+    pEncarregat.textContent = 'Encarregat:';
+    pEncarregat.classList.add('p-encarregat');
 
     const seleccionarEncarregat = document.createElement('select');
     seleccionarEncarregat.name = 'encarregat_select';
@@ -156,10 +184,30 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
             .then(response => response.json())
             .then(encarregats => {
                 seleccionarEncarregat.innerHTML = '';
-                encarregats.forEach(encarregat => {
+                encarregats.forEach(encarregatItem => {
                     const opcio = document.createElement('option');
-                    opcio.value = encarregat.id_usuari;
-                    opcio.textContent = encarregat.nom_usuari;
+                    opcio.value = encarregatItem.id_usuari;
+                    opcio.textContent = encarregatItem.nom_usuari;
+
+                    if (encarregatItem.id_usuari === encarregat) {
+                        opcio.selected = true; // Seleccionar el encargado actual
+                        encarregatOcult.value = encarregat;
+                        const elementEncarregat = document.createElement('span');
+                        elementEncarregat.textContent = encarregatItem.nom_usuari;
+                        elementEncarregat.dataset.id = encarregatItem.id_usuari;
+                        elementEncarregat.classList.add('encarregat-item');
+
+                        const botoEliminar = document.createElement('button');
+                        botoEliminar.textContent = '✖';
+                        botoEliminar.classList.add('btn-eliminar');
+                        botoEliminar.addEventListener('click', () => {
+                            elementEncarregat.remove();
+                            encarregatOcult.value = '';
+                        });
+
+                        elementEncarregat.appendChild(botoEliminar);
+                        encarregatSeleccionat.appendChild(elementEncarregat);
+                    }
 
                     seleccionarEncarregat.appendChild(opcio);
                 });
@@ -194,70 +242,79 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
 
     carregarEncarregats();
 
-    const h3Encarregat = document.createElement('h3');
-    h3Encarregat.textContent = 'Encarregat';
-
-    const h3Estat = document.createElement('h3');
-    h3Estat.textContent = 'Estat';
+    const pEstat = document.createElement('p');
+    pEstat.textContent = 'Estat:';
+    pEstat.classList.add('p-estat');
 
     const seleccionarEstat = document.createElement('select');
     seleccionarEstat.name = 'estat';
     seleccionarEstat.classList.add('estat-tasca');
-    
-    const opcionsEstat = ['Pendent', 'En Progres', 'Completada'];
-    opcionsEstat.forEach((estado, index) => {
+
+    const opcionsEstat = [
+        { id: 1, text: 'Pendent' },
+        { id: 2, text: 'En Progres' },
+        { id: 3, text: 'Completada' },
+    ];
+
+    opcionsEstat.forEach(opcio => {
         const opcioEstat = document.createElement('option');
-        opcioEstat.value = index + 1;
-        opcioEstat.textContent = estado;
-        if (estado === estat) {
-            opcioEstat.selected = true;
+        opcioEstat.value = opcio.id;
+        opcioEstat.textContent = opcio.text;
+
+        if (opcio.id.toString() === estat.toString()) {
+            opcioEstat.selected = true; // Seleccionar el estado actual
         }
+
         seleccionarEstat.appendChild(opcioEstat);
-    });    
+    });
+
     const actualitzarBoto = document.createElement('button');
     actualitzarBoto.type = 'submit';
     actualitzarBoto.textContent = 'Actualitzar tasca';
     actualitzarBoto.classList.add('btn-actualitzar');
     actualitzarBoto.name = 'actualitzar_tasca';
-    
+
     const idTascaInput = document.createElement('input');
     idTascaInput.type = 'hidden';
     idTascaInput.name = 'id_tasca';
     idTascaInput.value = idTasca;
-    
+
     form.addEventListener('submit', (event) => {
         const nom = nomTasca.value.trim();
         const descripcio = descripcioTasca.value.trim();
         const dataInici = new Date(dataIniciTasca.value);
         const dataFi = new Date(dataFiTasca.value);
-    
+
         if (!nom || !descripcio || !dataInici || !dataFi || !encarregatOcult.value) {
             event.preventDefault();
             alert('Hi ha algun camp incomplert');
             return;
         }
-    
+
         if (dataFi < dataInici) {
             event.preventDefault();
             alert('La data final no pot ser menor que la data inicial');
         }
     });
-    
+
+    form.appendChild(pNomTasca);
     form.appendChild(nomTasca);
+    form.appendChild(pDescripcioTasca);
     form.appendChild(descripcioTasca);
+    form.appendChild(pDataInici);
     form.appendChild(dataIniciTasca);
+    form.appendChild(pDataFi);
     form.appendChild(dataFiTasca);
-    form.appendChild(h3Encarregat);
+    form.appendChild(pEncarregat);
     form.appendChild(seleccionarEncarregat);
     form.appendChild(encarregatSeleccionat);
     form.appendChild(encarregatOcult);
-    form.appendChild(h3Estat);
+    form.appendChild(pEstat);
     form.appendChild(seleccionarEstat);
     form.appendChild(idTascaInput);
     form.appendChild(actualitzarBoto);
-    
+
     divTasca.appendChild(botoTancar);
     divTasca.appendChild(form);
     tasquesContainer2.appendChild(divTasca);
-}
-    
+}   

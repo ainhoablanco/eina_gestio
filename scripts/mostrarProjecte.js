@@ -109,8 +109,12 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     eliminarBoto.classList.add('btn-eliminarProjecte');
 
     eliminarBoto.addEventListener('click', () => {
-        form.remove();
+        divProjecte.remove();
     });
+
+    const pNomProjecte = document.createElement('p');
+    pNomProjecte.textContent = 'Nom del projecte:';
+    pNomProjecte.classList.add('p-nom-projecte');
 
     const nomProjecte = document.createElement('input');
     nomProjecte.type = 'text';
@@ -119,17 +123,29 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     nomProjecte.classList.add('nom-projecte');
     nomProjecte.value = nom;
 
+    const pDescripcioProjecte = document.createElement('p');
+    pDescripcioProjecte.textContent = 'Descripció del projecte:';
+    pDescripcioProjecte.classList.add('p-descripcio-projecte');
+
     const descripcioProjecte = document.createElement('textarea');
     descripcioProjecte.name = 'descripcio';
     descripcioProjecte.placeholder = 'Descripció del projecte';
     descripcioProjecte.classList.add('descripcio-projecte');
     descripcioProjecte.value = descripcio;
 
+    const pDataInici = document.createElement('p');
+    pDataInici.textContent = 'Data d\'inici:';
+    pDataInici.classList.add('p-data-inici');
+
     const dataIniciProjecte = document.createElement('input');
     dataIniciProjecte.type = 'date';
     dataIniciProjecte.name = 'data_inici';
     dataIniciProjecte.classList.add('data-inici');
     dataIniciProjecte.value = dataInici;
+
+    const pDataFi = document.createElement('p');
+    pDataFi.textContent = 'Data de fi:';
+    pDataFi.classList.add('p-data-fi');
 
     const dataFiProjecte = document.createElement('input');
     dataFiProjecte.type = 'date';
@@ -167,9 +183,13 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     });
 
     form.appendChild(eliminarBoto);
+    form.appendChild(pNomProjecte);
     form.appendChild(nomProjecte);
+    form.appendChild(pDescripcioProjecte);
     form.appendChild(descripcioProjecte);
+    form.appendChild(pDataInici);
     form.appendChild(dataIniciProjecte);
+    form.appendChild(pDataFi);
     form.appendChild(dataFiProjecte);
     form.appendChild(idProjecteInput);
     form.appendChild(actualitzarBoto);

@@ -28,17 +28,29 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     descripcioTasca.classList.add('descripcio-projecte');
     descripcioTasca.value = descripcio;
 
+    const pDataInici = document.createElement('p');
+    pDataInici.textContent = 'Data d\'inici:';
+    pDataInici.classList.add('p-data-inici');
+
     const dataIniciTasca = document.createElement('input');
     dataIniciTasca.type = 'date';
     dataIniciTasca.name = 'data_inici';
     dataIniciTasca.classList.add('data-inici');
     dataIniciTasca.value = dataInici;
 
+    const pDataFi = document.createElement('p');
+    pDataFi.textContent = 'Data de fi:';
+    pDataFi.classList.add('p-data-fi');
+
     const dataFiTasca = document.createElement('input');
     dataFiTasca.type = 'date';
     dataFiTasca.name = 'data_fi';
     dataFiTasca.classList.add('data-fi');
     dataFiTasca.value = dataFi;
+
+    const pEncarregat = document.createElement('p');
+    pEncarregat.textContent = 'Encarregat:';
+    pEncarregat.classList.add('p-encarregat');
 
     const seleccionarEncarregat = document.createElement('select');
     seleccionarEncarregat.name = 'encarregat_select';
@@ -95,11 +107,9 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
 
     carregarEncarregats();
 
-    const h3Encarregat = document.createElement('h3');
-    h3Encarregat.textContent = 'Encarregat';
-
-    const h3Estat = document.createElement('h3');
-    h3Estat.textContent = 'Estat';
+    const pEstat = document.createElement('p');
+    pEstat.textContent = 'Estat:';
+    pEstat.classList.add('p-estat');
 
     const seleccionarEstat = document.createElement('select');
     seleccionarEstat.name = 'estat';
@@ -142,13 +152,15 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
 
     form.appendChild(nomTasca);
     form.appendChild(descripcioTasca);
+    form.appendChild(pDataInici);
     form.appendChild(dataIniciTasca);
+    form.appendChild(pDataFi);
     form.appendChild(dataFiTasca);
-    form.appendChild(h3Encarregat);
+    form.appendChild(pEncarregat);
     form.appendChild(seleccionarEncarregat);
     form.appendChild(encarregatSeleccionat);
     form.appendChild(encarregatOcult);
-    form.appendChild(h3Estat);
+    form.appendChild(pEstat);
     form.appendChild(seleccionarEstat);
     form.appendChild(guardarBoto);
 

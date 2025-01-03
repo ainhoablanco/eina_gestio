@@ -28,11 +28,19 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
     descripcioProjecte.classList.add('descripcio-projecte');
     descripcioProjecte.value = descripcio;
 
+    const pDataInici = document.createElement('p');
+    pDataInici.textContent = 'Data d\'inici:';
+    pDataInici.classList.add('p-data-inici');
+
     const dataIniciProjecte = document.createElement('input');
     dataIniciProjecte.type = 'date';
     dataIniciProjecte.name = 'data_inici';
     dataIniciProjecte.classList.add('data-inici');
     dataIniciProjecte.value = dataInici;
+
+    const pDataFi = document.createElement('p');
+    pDataFi.textContent = 'Data de fi:';
+    pDataFi.classList.add('p-data-fi');
 
     const dataFiProjecte = document.createElement('input');
     dataFiProjecte.type = 'date';
@@ -136,7 +144,9 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
 
     form.appendChild(nomProjecte);
     form.appendChild(descripcioProjecte);
+    form.appendChild(pDataInici);
     form.appendChild(dataIniciProjecte);
+    form.appendChild(pDataFi);
     form.appendChild(dataFiProjecte);
     form.appendChild(buscarColaboradors);
     form.appendChild(seleccionarColaboradors);
@@ -153,5 +163,5 @@ projecteNou.addEventListener('click', () => {
     nouDivProjecte.classList.add('projecte');
 
     afegirCamps(nouDivProjecte);
-    projectes.appendChild(nouDivProjecte);
+    projectes.prepend(nouDivProjecte);
 });

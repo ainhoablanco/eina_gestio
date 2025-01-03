@@ -10,6 +10,7 @@
 
 <body>
     <div id="header">
+        <a id="back-button" href="/htdocs/php/proyectos.php">PROJECTES</a>
         <button id="logout-button">Tancar sessió</button>
     </div>
     
