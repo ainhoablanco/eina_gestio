@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos</title>
+    <title>Tasques - AinTask</title>
     <link rel="stylesheet" href="/htdocs/style/style.css">
 </head>
 
 <body>
+    <img id="imatge-logo" src="/htdocs/imatges/logoAinTask.png" alt="logo">
+    
     <div id="header">
         <a id="back-button" href="/htdocs/php/proyectos.php">PROJECTES</a>
         <button id="logout-button">Tancar sessió</button>
     </div>
     
     <div id="body-tasques">
-        <img id="imatge-logo" src="/htdocs/imatges/logoAinTask.png" alt="logo">
 
         <div id="titol-animat" class="contenidor-titol">
             <span class="letter" style="--x:1; --y:1; --delay:3">T</span>

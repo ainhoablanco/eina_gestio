@@ -38,7 +38,7 @@ function mostrarTasques(tasques) {
 
         const eliminarBoto = document.createElement('button');
         eliminarBoto.type = 'submit';
-        eliminarBoto.textContent = 'X';
+        eliminarBoto.textContent = 'x';
         eliminarBoto.classList.add('btn-eliminarTasca');
         eliminarBoto.name = 'eliminar_tasca';
         eliminarBoto.setAttribute('data-id', tasca.id_tasca);
@@ -112,7 +112,7 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
     divTasca.setAttribute('data-id', idTasca);
 
     const botoTancar = document.createElement('button');
-    botoTancar.textContent = 'X';
+    botoTancar.textContent = 'x';
     botoTancar.classList.add('btn-tancar-tasca');
     botoTancar.addEventListener('click', () => {
         divTasca.remove();
@@ -198,7 +198,7 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
                         elementEncarregat.classList.add('encarregat-item');
 
                         const botoEliminar = document.createElement('button');
-                        botoEliminar.textContent = '✖';
+                        botoEliminar.textContent = 'x';
                         botoEliminar.classList.add('btn-eliminar');
                         botoEliminar.addEventListener('click', () => {
                             elementEncarregat.remove();
@@ -225,7 +225,7 @@ function actualitzarCamps(divTasca, nom = '', descripcio = '', dataInici = '', d
             elementEncarregat.classList.add('encarregat-item');
 
             const botoEliminar = document.createElement('button');
-            botoEliminar.textContent = '✖';
+            botoEliminar.textContent = 'x';
             botoEliminar.classList.add('btn-eliminar');
             botoEliminar.addEventListener('click', () => {
                 elementEncarregat.remove();

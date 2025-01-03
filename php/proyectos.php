@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos</title>
+    <title>Projectes - AinTask</title>
     <link rel="stylesheet" href="/htdocs/style/style.css">
 </head>
 
@@ -14,7 +14,7 @@
         <button id="logout-button">Tancar sessió</button>
     </div>
 
-    <img id="imatge-logo" src="../imatges/logoAinTask.png" alt="logo">
+    <img id="imatge-logo" src="/htdocs/imatges/logoAinTask.png" alt="logo">
     <div class="pantalla-principal-proyectos"></div>
     <div id="titol-animat" class="contenidor-titol">
         <span class="letter" style="--x:1; --y:1; --delay:3">P</span>
@@ -29,14 +29,16 @@
     </div>
 
     <div class="projectes">
-        <div class="projecte">
-            <div class="nou-projecte">
-                <button id="afegir-projecte">+</button>
-            </div>
+
+        <div class="nou-projecte">
+            <button id="afegir-projecte">+</button>
         </div>
+
+        <div id="form-projecte-container"></div>
+
     </div>
 
-    <form id="form-entrar" action="../php/controller.php" method="POST">
+    <form id="form-entrar" action="/htdocs/php/controller.php" method="POST">
         <input type="hidden" name="id_projecte" id="input-id-projecte">
         <button type="submit" name="entrar" id="btn-entrar" style="display:none">ENTRAR</button>
     </form>

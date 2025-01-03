@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
     fetch('/htdocs/php/selectProjecte.php')
-        .then (function (resposta) {
+        .then(function(resposta) {
             return resposta.json();
         })
         .then(projectes => {
@@ -35,10 +35,10 @@ function mostrarProjectes(projectes) {
 
         const eliminarBoto = document.createElement('button');
         eliminarBoto.type = 'submit';
-        eliminarBoto.textContent = 'X';
+        eliminarBoto.textContent = 'x';
         eliminarBoto.classList.add('btn-eliminarProjecte');
         eliminarBoto.name = 'eliminar_projecte';
-        eliminarBoto.setAttribute('data-id', projecte.id_projecte);    
+        eliminarBoto.setAttribute('data-id', projecte.id_projecte);
 
         const idProjecte = document.createElement('input');
         idProjecte.type = 'hidden';
@@ -70,6 +70,10 @@ function mostrarProjectes(projectes) {
         entrarBoto.classList.add('btn-entrar');
 
         editarBoto.addEventListener('click', () => {
+            const formulariObert = document.querySelector('.projecte .form-edicio');
+            if (formulariObert) {
+                formulariObert.parentElement.remove();
+            }
             const nouDivProjecte = document.createElement('div');
             nouDivProjecte.classList.add('projecte');
             actualitzarCamps(nouDivProjecte, projecte.nom, projecte.descripcio, projecte.data_inici, projecte.data_fi, projecte.id_projecte);
@@ -100,12 +104,13 @@ function actualitzarCamps(divProjecte, nom = '', descripcio = '', dataInici = ''
     divProjecte.innerHTML = '';
 
     const form = document.createElement('form');
+    form.classList.add('form-edicio');
     form.action = '/htdocs/php/controller.php';
     form.method = 'POST';
 
     const eliminarBoto = document.createElement('button');
     eliminarBoto.type = 'submit';
-    eliminarBoto.textContent = 'X';
+    eliminarBoto.textContent = 'x';
     eliminarBoto.classList.add('btn-eliminarProjecte');
 
     eliminarBoto.addEventListener('click', () => {

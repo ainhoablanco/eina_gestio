@@ -1,11 +1,11 @@
 const projecteNou = document.getElementById('afegir-projecte');
-const projectes = document.querySelector('.projectes');
+const projectes = document.getElementById('form-projecte-container');
 
 function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dataFi = '', esEdicio = false) {
     divProjecte.innerHTML = '';
 
     const botoTancar = document.createElement('button');
-    botoTancar.textContent = 'X';
+    botoTancar.textContent = 'x';
     botoTancar.classList.add('btn-tancar');
     botoTancar.addEventListener('click', () => {
         divProjecte.remove();
@@ -92,7 +92,7 @@ function afegirCamps(divProjecte, nom = '', descripcio = '', dataInici = '', dat
                 elementColaborador.classList.add('colaborador-item');
 
                 const botoEliminar = document.createElement('button');
-                botoEliminar.textContent = '✖';
+                botoEliminar.textContent = 'x';
                 botoEliminar.classList.add('btn-eliminar');
                 botoEliminar.addEventListener('click', () => {
                     elementColaborador.remove();
@@ -163,5 +163,6 @@ projecteNou.addEventListener('click', () => {
     nouDivProjecte.classList.add('projecte');
 
     afegirCamps(nouDivProjecte);
-    projectes.prepend(nouDivProjecte);
+    projectes.innerHTML = '';
+    projectes.appendChild(nouDivProjecte);
 });

@@ -5,7 +5,7 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
     divTasca.innerHTML = '';
 
     const botoTancar = document.createElement('button');
-    botoTancar.textContent = 'X';
+    botoTancar.textContent = 'x';
     botoTancar.classList.add('btn-tancar-tasca');
     botoTancar.addEventListener('click', () => {
         divTasca.remove();
@@ -90,7 +90,7 @@ function afegirCampsTasca(divTasca, nom = '', descripcio = '', dataInici = '', d
             elementEncarregat.classList.add('encarregat-item');
 
             const botoEliminar = document.createElement('button');
-            botoEliminar.textContent = '✖';
+            botoEliminar.textContent = 'x';
             botoEliminar.classList.add('btn-eliminar');
             botoEliminar.addEventListener('click', () => {
                 elementEncarregat.remove();

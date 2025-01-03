@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* BODY */
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #2f2f2f;
     margin: 0;
     justify-content: center;
@@ -31,9 +33,9 @@ body {
 
 #imatge-logo {
     position: absolute;
-    top: 30px;
-    left: 30px;
-    height: 100px;
+    top: 2rem;
+    left: 2rem;
+    height: 6rem;
     width: auto;
 }
 
@@ -48,19 +50,20 @@ body {
 /* TÍTOL PRINCIPAL */
 .contenidor-titol {
     display: flex;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: bold;
     color: #ff66b3;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; 
     justify-content: center;
 }
+
 
 /* ANIMACIÓ DE LES LLETRES DEL TÍTOL */
 .letter {
     display: inline-block;
     opacity: 0;
-    transform: translate(calc(var(--x) * 100px - 50px),
-            calc(var(--y) * 100px - 50px));
+    transform: translate(calc(var(--x) * 6rem - 2.5rem), 
+            calc(var(--y) * 6rem - 2.5rem));
     animation: moureLletres 1s ease forwards;
     animation-delay: calc(var(--delay) * 0.2s);
 }
@@ -75,11 +78,12 @@ body {
 /* ESTILS GENERALS DELS BOTONS */
 .btn {
     font-size: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-    margin: 0 10px;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); 
+    padding: 0.625rem 1.25rem;
+    margin: 0 0.625rem; 
 }
+
 
 /* BOTÓ INICI SESSIÓ */
 .boto-loggin {
@@ -104,19 +108,17 @@ body {
 /* ESTILS GENERALS FORMULARI INICIAR SESSIÓ I REGISTRAR-SE */
 .formulari-container {
     background-color: #BBE6E4;
-    /* Fondo del formulario */
-    border: 2px solid #80c9c7;
-    /* Color del borde, ligeramente más oscuro */
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 0.125rem solid #80c9c7;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    max-width: 25rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 /* TITULO DEL FORMULARIO */
 .formulari-container h2 {
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
     color: #2f2f2f;
 }
 
@@ -125,15 +127,15 @@ body {
     color: #2f2f2f;
 }
 
-/* CAMPOS DE CONTROL */
+
 .formulari-control {
     background-color: #d6f3f2;
     border: 1px solid #80c9c7;
     color: #2f2f2f;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
+    padding: 0.5rem;
+    margin-bottom: 0.9375rem;
 }
 
 /* ESTILO DE LOS BOTONES DEL FORMULARIO */
@@ -144,10 +146,10 @@ body {
     background-color: #80c9c7;
     color: #ffffff;
     border: none;
-    padding: 10px 15px;
+    padding: 0.625rem 0.9375rem;
     font-size: 1rem;
     transition: background-color 0.3s;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 }
 
 /* HOVER DE LOS BOTONES */
@@ -159,7 +161,7 @@ body {
 /* Botón añadir proyecto */
 .nou-projecte {
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     text-align: center;
 }
 
@@ -170,28 +172,27 @@ body {
     cursor: pointer;
     color: #ff66b3;
     transition: color 0.3s ease;
-    width: 280px;
-    height: 500px;
+    width: 17.5rem;
+    height: 31.25rem;
 }
 
 #afegir-projecte:hover {
     color: #ff3a99;
 }
 
-/* Contenedor de proyectos */
+/* PROJECTES*/
 .projectes {
     background-color: #bbe6e4d2;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     width: 90%;
     margin: 3% auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 1.25rem;
+    padding: 1.25rem;
 }
 
-/* Cada proyecto */
 .projecte, .nou-projecte {
     background-color: #BBE6E4;
     color: black;
@@ -199,20 +200,20 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 280px;
-    height: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 17.5rem;
+    height: 31.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
     font-size: 1.2rem;
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .projecte:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.3125rem); /* 5px */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 .p-data-inici, .p-data-fi, 
@@ -228,7 +229,6 @@ body {
     margin-top: 0px;
 }
 
-/* Campos de proyecto */
 .nom-projecte,
 .descripcio-projecte,
 .data-inici,
@@ -238,36 +238,35 @@ body {
 .buscar-colaboradors,
 .buscar-encarregat {
     background-color: #f4f9f9;
-    border: 1px solid #80c9c7;
-    border-radius: 8px;
-    padding: 8px;
+    border: 0.06rem solid #80c9c7;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
     width: 90%;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     font-size: 1rem;
     color: #2f2f2f;
 }
 
-/* Botón Guardar */
+/* Botons */
 .btn-guardar, .btn-actualitzar {
     background-color: #f6f930;
     color: black;
     border: none;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     cursor: pointer;
-    size: 10px;
     transition: background-color 0.3s ease;
 }
 
-.btn-editar{
+.btn-editar {
     color: black;
     background-color: transparent;
-    border: solid 1px #ff3a99;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border: solid 0.0625rem #ff3a99;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.3125rem;
     cursor: pointer;
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
 }
 
 .btn-editar:hover{
@@ -278,14 +277,14 @@ body {
     background-color: #f6f930cc;
 }
 
-.btn-entrar{
+.btn-entrar {
     background-color: #f6f9309f;
     color: f6f930;
     border: none;
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 1.25rem;
+    padding: 0.625rem 1.25rem;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     cursor: pointer;
     width: 90%;
     transition: background-color 0.3s ease;
@@ -295,10 +294,10 @@ body {
     background-color: #f6f930;
 }
 
-.btn-tancar, .btn-eliminarProjecte{
+.btn-tancar, .btn-eliminarProjecte {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.625rem;
+    right: 0.625rem;
 }
 
 .btn-tancar, .btn-eliminar, .btn-eliminarProjecte, .btn-tancar-tasca, .btn-eliminarTasca {
@@ -306,17 +305,17 @@ body {
     border: none;
     border-radius: 50%;
     color: white;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
+    width: 1.875rem;
+    height: 1.875rem;
+    font-size: 1rem;
     cursor: pointer;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.btn-tancar-tasca{
-margin-bottom: 3px;
+.btn-tancar-tasca {
+    margin-bottom: 0.1875rem;
 }
 
 .btn-tancar:hover, .btn-eliminar:hover, .btn-eliminarProjecte:hover, .btn-tancar-tasca:hover, .btn-eliminarTasca:hover {
@@ -350,31 +349,33 @@ margin-bottom: 3px;
 
 .titol-columna {
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     color: #ff66b3;
 }
 
 .tasques {
-    border-radius: 10px;
+    border-radius: 0.625rem;
     background-color: #bbe6e4d2;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
-    padding: 20px;
-    margin-bottom: 50px;
+    padding: 1.25rem;
+    margin-bottom: 3.125rem;
 }
 
 .nova-tasca {
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 0.625rem;
+    padding: 0.625rem;
     background-color: #BBE6E4;
     width: 90%;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     text-align: center;
 }
 
 #afegir-tasca {
+    height: 3.75rem;
+    width: 100%;
     font-size: 3rem;
     background: none;
     border: none;
@@ -389,30 +390,30 @@ margin-bottom: 3px;
 
 .columnes-tasques {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
     justify-content: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .columna {
     flex: 1;
     background-color: #BBE6E4;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 .tasca {
-    margin: 10px;
-    border: 1px solid #ff66b3;
+    margin: 0.625rem;
+    border: 0.06rem solid #ff66b3;
     color: #2f2f2f;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 0.3125rem;
+    padding: 0.625rem;
     text-align: left;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .tasca:hover {
@@ -423,26 +424,139 @@ margin-bottom: 3px;
 #header {
     display: flex;
     justify-content: flex-end;
-    padding: 10px;
+    padding: 0.625rem;
 }
 
 #logout-button, #back-button {
-    margin-top: 40px;
-    margin-right: 40px;
+    margin-top: 2.5rem;
+    margin-right: 2.5rem;
     background-color: #f6f930;
     color: rgb(0, 0, 0);
     border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
+    padding: 0.625rem 0.9375rem;
+    font-size: 0.875rem;
+    border-radius: 0.3125rem;
     cursor: pointer;
 }
 
 #back-button {
-    margin-right: 10px;
+    margin-right: 0.625rem;
     text-decoration: none;
 }
 
 #logout-button:hover, #back-button:hover {
     background-color: #f6f930d0;
+}
+
+@media (max-width: 768px) {
+    .projectes {
+        width: 80%;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .projecte, .nou-projecte {
+        width: 15rem;
+        height: 28rem;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.25rem;
+    }
+
+    #afegir-projecte {
+        width: 15rem;
+        height: 25rem;
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .btn-guardar, .btn-actualitzar, .btn-editar {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .btn-entrar {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .p-data-inici, .p-data-fi, 
+    .p-nom-projecte, 
+    .p-descripcio-projecte, 
+    .p-estat, 
+    .p-encarregat, 
+    .p-nom-tasca,
+    .p-encarregat, 
+    .p-descripcio-tasca {
+        font-size: 0.875rem;
+    }
+
+    .nom-projecte,
+    .descripcio-projecte,
+    .data-inici,
+    .data-fi,
+    .colaboradors,
+    .estat-tasca,
+    .buscar-colaboradors,
+    .buscar-encarregat {
+        padding: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    .tasques {
+        width: 90%;
+        padding: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .nova-tasca {
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        width: 95%;
+    }
+
+    #afegir-tasca {
+        height: 3rem;
+        width: 100%;
+        font-size: 2.5rem;
+    }
+
+    .columnes-tasques {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .columna {
+        padding: 0.75rem;
+        border-radius: 0.25rem;
+    }
+
+    .tasca {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    #header {
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 1rem;
+    }
+
+    #logout-button {
+        margin-right: 0;
+        margin-top: 1rem;
+    }
+
+    #back-button {
+        margin-right: 0;
+        margin-top: 1rem;
+    }
+    #header { display: flex; flex-direction: column-reverse; /* Invierte el orden de los botones */ }
 }
