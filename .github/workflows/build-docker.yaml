@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build image
-        run: docker build -t imagen-ainhoa .
+        run: docker build ./Dockerfile/ -t imagen-ainhoa .
       - name: push image to docker hub
         run: |
           docker push ainhoablanco/imagen-ainhoa:latest
