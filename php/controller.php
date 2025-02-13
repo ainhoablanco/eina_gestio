@@ -71,4 +71,10 @@ if (isset($_POST['eliminar_tasca'])) {
     exit();
 }
 
+if (isset($_POST['actualitzar_estat_tasca'])) {
+    actualitzar_estat_tasca($_POST['id_tasca'], $_POST['estat_tasca']);
+    header('Location: /htdocs/php/tasques.php');
+    exit();
+}
+
 ?>

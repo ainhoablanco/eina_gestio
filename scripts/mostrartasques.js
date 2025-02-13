@@ -1,15 +1,8 @@
 window.addEventListener('load', () => {
     fetch('/htdocs/php/selectTasques.php')
-        .then(function (resposta) {
-            return resposta.json();
-        })
-        .then(tasques => {
-            mostrarTasques(tasques);
-        })
-        .catch(error => {
-            console.error('Hi ha hagut un error:', error);
-        });
-
+        .then((res) => res.json())
+        .then((tasques) => mostrarTasques(tasques))
+        .catch((error) => console.error('Error:', error));
     const logoutButton = document.getElementById("logout-button");
     if (logoutButton) {
         logoutButton.addEventListener("click", () => {
@@ -23,15 +16,24 @@ window.addEventListener('load', () => {
             window.location.href = "/htdocs/index.html";
         });
     }
+    configurarDragAndDrop();
 });
-
 
 function mostrarTasques(tasques) {
     const containerPerFer = document.querySelector('.tasques-per-fer');
     const containerEnProces = document.querySelector('.tasques-en-proces');
     const containerFet = document.querySelector('.tasques-fetes');
 
-    tasques.forEach(tasca => {
+    containerPerFer.innerHTML = '';
+    containerEnProces.innerHTML = '';
+    containerFet.innerHTML = '';
+
+    tasques.forEach((tasca) => {
+        const divTasca = document.createElement('div');
+        divTasca.classList.add('tasca');
+        divTasca.setAttribute('draggable', 'true');
+        divTasca.setAttribute('id', `tasca-${tasca.id_tasca}`);
+
         const form = document.createElement('form');
         form.action = '/htdocs/php/controller.php';
         form.method = 'POST';
@@ -52,9 +54,6 @@ function mostrarTasques(tasques) {
         estatTasca.type = 'hidden';
         estatTasca.name = 'estat_tasca';
         estatTasca.value = tasca.id_estat;
-
-        const divTasca = document.createElement('div');
-        divTasca.classList.add('tasca');
 
         const nomTasca = document.createElement('h3');
         nomTasca.textContent = tasca.nom;
@@ -95,8 +94,69 @@ function mostrarTasques(tasques) {
         } else if (tasca.id_estat === 3) {
             containerFet.appendChild(divTasca);
         }
+
+        divTasca.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text', divTasca.id);
+        });
+
+        switch (tasca.id_estat) {
+            case 1:
+                containerPerFer.appendChild(divTasca);
+                break;
+            case 2:
+                containerEnProces.appendChild(divTasca);
+                break;
+            case 3:
+                containerFet.appendChild(divTasca);
+                break;
+        }
     });
 }
+
+function configurarDragAndDrop() {
+    const columnas = document.querySelectorAll('.columna');
+
+    columnas.forEach((columna) => {
+        columna.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        columna.addEventListener('drop', (event) => {
+            event.preventDefault();
+
+            const idTasca = event.dataTransfer.getData('text');
+            const tasca = document.getElementById(idTasca);
+
+            if (tasca) {
+                columna.appendChild(tasca);
+
+                let nouEstat;
+                if (columna.id === 'per-fer') nouEstat = 1;
+                if (columna.id === 'en-proces') nouEstat = 2;
+                if (columna.id === 'fet') nouEstat = 3;
+
+                actualizarEstatTasca(idTasca.split('-')[1], nouEstat);
+            }
+        });
+    });
+}
+
+function actualizarEstatTasca(idTasca, estatTasca) {
+    const formData = new FormData();
+    formData.append('id_tasca', idTasca);
+    formData.append('estat_tasca', estatTasca);
+    formData.append('actualitzar_estat_tasca', true);
+
+    fetch('/htdocs/php/controller.php', {
+        method: 'POST',
+        body: formData,
+    })
+        .then((res) => res.text())
+        .then((data) => console.log('Estat actualitzat:', data))
+        .catch((error) => console.error('Error actualitzant estat:', error));
+}
+
+
 
 const tasquesContainer2 = document.getElementById('form-tasca-container');
 

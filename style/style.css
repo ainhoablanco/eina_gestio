@@ -1,4 +1,6 @@
+/* FONT */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /* BODY */
 body {
     font-family: 'Poppins', sans-serif;
@@ -152,7 +154,6 @@ body {
     border-radius: 0.3125rem;
 }
 
-/* HOVER DE LOS BOTONES */
 .btn.boto-loggin-pg:hover,
 .btn.boto-register-pg:hover {
     background-color: #6ab0ae;
@@ -333,6 +334,8 @@ body {
     padding-top: 10px;
 }
 
+/* TASQUES */
+
 #body-tasques {
     display: flex;
     flex-direction: column;
@@ -447,6 +450,8 @@ body {
 #logout-button:hover, #back-button:hover {
     background-color: #f6f930d0;
 }
+
+/* MEDIA MOBIL */
 
 @media (max-width: 768px) {
     .projectes {

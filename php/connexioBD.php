@@ -308,5 +308,22 @@ function eliminar_tasca($id_tasca) {
     }
 }
 
+function actualitzar_estat_tasca($id_tasca, $estat_tasca) {
+    try {
+        $connexio = obrirBD();
+        $insertarSentencia = "update tasca set id_estat = :estat where id_tasca = :id_tasca";
+        $sentencia = $connexio->prepare($insertarSentencia);
+    
+        $sentencia->bindParam(':estat', $estat_tasca);
+        $sentencia->bindParam(':id_tasca', $id_tasca);
+    
+        $sentencia->execute();
+
+        $connexio = tancarBD($connexio);
+    } catch (Exception $e) {
+        echo "Error al actualizar el proyecto: " . $e->getMessage();
+    }
+}
+
 
 ?>
